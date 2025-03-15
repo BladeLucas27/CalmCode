@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="off_yellow">#FBE7C6</color>
+    <color name="hot_pink">#FFAEBC</color>
+    <color name="beige">#D6C099</color>
+    <color name="cream">#D6CEC0</color>
+    <color name="pewter">#8E8A92</color>
+    <color name="dusty_rose">#AE8781</color>
+    <color name="teal_green">#167D7F</color>
+    <color name="teal">#29A0B1</color>
+
+    <color name="rose_red">#821D30</color>
+    <color name="rose_quartz">#FFC5D0</color>
+
+    <color name="tiff_blue">#A0E7E5</color>
+    <color name="midnight_blue">#0C6170</color>
+    <color name="blue_green">#37BEB0</color>
+    <color name="blue">#2E8BC0</color>
+    <color name="dark_blue">#0C2D48</color>
+    <color name="navy_blue">#145DA0</color>
+
+    <color name="mint">#DDFFE7</color>
+    <color name="seafoam_green">#2F5233</color>
+    <color name="kelly_green">#B1D8B7</color>
+    <color name="spearmint">#94C973</color>
+    <color name="green">#104210</color>
+    <color name="lime_green">#76B947</color>
+</resources>
