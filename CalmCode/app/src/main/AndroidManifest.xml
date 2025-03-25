@@ -13,10 +13,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CalmCode"
+        android:theme="@style/CalmCode"
         tools:targetApi="31">
         <activity
             android:name=".HomeActivity"
+            android:theme="@style/CalmCode"
             android:exported="false" />
         <activity
             android:name=".EditProfileActivity"

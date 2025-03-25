@@ -16,8 +16,9 @@ class SettingsActivity() : Activity() {
         val button_profile = findViewById<ImageButton>(R.id.button_profile)
         button_profile.setOnClickListener {
             Toast.makeText(this, "Back to profile", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, ProfileActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val blueTheme = findViewById<Button>(R.id.button_theme_blue)
@@ -46,6 +47,7 @@ class SettingsActivity() : Activity() {
             Toast.makeText(this, "Here we are!", Toast.LENGTH_LONG).show()
             val intent = Intent(this, DevelopersActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
     }

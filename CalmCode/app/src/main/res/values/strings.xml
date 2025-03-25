@@ -2,4 +2,6 @@
     <string name="app_name">CalmCode</string>
     <string name="username">____________________________</string>
     <string name="email">____________________________</string>
+    <string name="drawer_close">close</string>
+    <string name="drawer_open">open</string>
 </resources>
