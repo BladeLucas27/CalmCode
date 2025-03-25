@@ -70,7 +70,7 @@ class LoginActivity : Activity() {
                 Toast.makeText(this, "No account found. Please register first.", Toast.LENGTH_LONG).show()
             } else if (username == savedUsername && password == savedPassword) {
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, ProfileActivity::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
