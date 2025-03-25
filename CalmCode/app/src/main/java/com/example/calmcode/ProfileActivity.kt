@@ -24,8 +24,9 @@ class ProfileActivity : Activity() {
         button_settings.setOnClickListener {
 
             Toast.makeText(this, "Going to settings...", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, SettingsActivity::class.java)
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val button_editprofile = findViewById<Button>(R.id.button_editprofile)
@@ -34,6 +35,7 @@ class ProfileActivity : Activity() {
             Toast.makeText(this, "Going to settings...", Toast.LENGTH_LONG).show()
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

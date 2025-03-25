@@ -42,6 +42,7 @@ class EditProfileActivity : Activity() {
 
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

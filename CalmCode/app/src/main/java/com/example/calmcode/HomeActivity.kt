@@ -1,17 +1,66 @@
 package com.example.calmcode
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.example.calmcode.utils.toast
+import com.google.android.material.navigation.NavigationView
 
-class HomeActivity : Activity() {
+class HomeActivity : AppCompatActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+
         setContentView(R.layout.activity_home)
+
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.drawer_open, R.string.drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.nav_settings -> Intent(this, SettingsActivity::class.java).apply {
+                    toast("Settings")
+                    startActivity(this)
+                    finish()
+                }
+                R.id.nav_profile -> Intent(this, ProfileActivity::class.java).apply {
+                    toast("Profile")
+                    startActivity(this)
+                    finish()
+                }
+                R.id.nav_about -> Intent(this, DevelopersActivity::class.java).apply {
+                    toast("About Us")
+                    startActivity(this)
+                    finish()
+                }
+                R.id.nav_logout -> {
+                    toast("Exiting")
+                    finish()
+                }
+            }
+            drawerLayout.closeDrawers()
+            true
+        }
 
         val btnDaily = findViewById<Button>(R.id.btnDaily)
         val btnCourse = findViewById<Button>(R.id.btnCourse)

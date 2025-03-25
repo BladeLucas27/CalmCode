@@ -21,6 +21,7 @@ class DevelopersActivity : Activity() {
             Toast.makeText(this, "Back to Settings", Toast.LENGTH_LONG).show()
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
