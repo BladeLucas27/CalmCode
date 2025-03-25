@@ -16,8 +16,13 @@
         android:theme="@style/CalmCode"
         tools:targetApi="31">
         <activity
+            android:name=".CalmingMusicActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MusicGenresActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
-            android:theme="@style/CalmCode"
             android:exported="false" />
         <activity
             android:name=".EditProfileActivity"
