@@ -45,6 +45,7 @@ class CalmingMusicActivity : Activity() {
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
             startActivity(Intent(this, MusicGenresActivity::class.java))
+            finish()
         }
     }
 }
