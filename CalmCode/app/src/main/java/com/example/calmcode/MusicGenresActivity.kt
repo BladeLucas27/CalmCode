@@ -36,7 +36,8 @@ class MusicGenresActivity : Activity() {
 
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
-//            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         }
     }
 }

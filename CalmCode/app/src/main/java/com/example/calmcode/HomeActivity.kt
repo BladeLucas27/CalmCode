@@ -3,7 +3,9 @@ package com.example.calmcode
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -70,5 +72,12 @@ class HomeActivity : AppCompatActivity() {
         val btnWorkshop = findViewById<Button>(R.id.btnWorkshop)
         val btnCoaching = findViewById<Button>(R.id.btnCoaching)
         val btnPlans = findViewById<Button>(R.id.btnPlans)
+
+        btnDaily.setOnClickListener {
+            Toast.makeText(this, "Opening Genre Selection screen", Toast.LENGTH_LONG).show()
+            val intent = Intent(    this,MusicGenresActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
