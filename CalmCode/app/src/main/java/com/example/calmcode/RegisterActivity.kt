@@ -14,6 +14,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calmcode.app.myApplication
 import java.util.regex.Pattern
 
 class RegisterActivity : Activity() {
@@ -83,6 +84,9 @@ class RegisterActivity : Activity() {
                 editor.putString("username", username)
                 editor.putString("password", password)
                 editor.apply()
+
+                (application as myApplication).setUsername(username)
+                (application as myApplication).setPassword(password)
 
                 Toast.makeText(this, "Account Created Successfully!", Toast.LENGTH_LONG).show()
 

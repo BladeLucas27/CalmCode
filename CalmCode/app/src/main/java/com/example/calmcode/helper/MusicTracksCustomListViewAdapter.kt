@@ -10,15 +10,14 @@ import android.widget.TextView
 import com.example.calmcode.R
 import com.example.calmcode.data.MusicTrack
 
-class MusicTracksCustomListViewAdapter(
-    private val context: Context,
-    private val musicList: List<MusicTrack>,
+class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
     private val onClick: (MusicTrack) -> Unit) : BaseAdapter() {
     override fun getCount(): Int = musicList.size
     override fun getItem(position: Int): Any = musicList[position]
     override fun getItemId(position: Int): Long = position.toLong()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.template_custom_musictracks, parent, false)
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.template_custom_musictracks
+            , parent, false)
 
         val musicTrack = musicList[position]
 
@@ -28,20 +27,14 @@ class MusicTracksCustomListViewAdapter(
         buttonPic.setImageResource(musicTrack.currentStatus)
         musicName.setText(musicTrack.trackName)
         musicLength.setText(musicTrack.trackLength?.toComponents{ _, minutes, seconds, _ ->
-            if(seconds > 10){
-                "${minutes}:${seconds}"
-            } else{
-                "${minutes}:0${seconds}"
-            }
-             })
+            if(seconds > 10)"${minutes}:${seconds}"
+            else "${minutes}:0${seconds}" })
 
         view.setOnClickListener {
             onClick(musicTrack)
             if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                 musicTrack.currentStatus = R.drawable.baseline_pause_circle_24
-            } else{
-                musicTrack.currentStatus = R.drawable.baseline_play_circle_24
-            }
+            } else{ musicTrack.currentStatus = R.drawable.baseline_play_circle_24 }
             buttonPic.setImageResource(musicTrack.currentStatus)
         }
         return view

@@ -65,6 +65,13 @@ class HomeActivity : AppCompatActivity() {
         val btnDaily = findViewById<Button>(R.id.btnDaily)
         val btnCourse = findViewById<Button>(R.id.btnCourse)
         val btnFavorite = findViewById<Button>(R.id.btnFavorite)
+        btnFavorite.setOnClickListener {
+            toast("Going to Music Selection")
+            intent = Intent(this, MusicGenresActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         val btnDownloads = findViewById<Button>(R.id.btnDownloads)
         val btnCommunity = findViewById<Button>(R.id.btnCommunity)
         val btnWorkshop = findViewById<Button>(R.id.btnWorkshop)
