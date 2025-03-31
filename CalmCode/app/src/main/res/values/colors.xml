@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorBackground">#121212</color> <!-- Dark theme background -->
+    <color name="colorOnBackground">#FFFFFF</color> <!-- White text on dark -->
+    <color name="colorPrimary">#0C6170</color> <!-- Midnight blue for Material 3 -->
+    <color name="colorOnPrimary">#000000</color> <!-- Black text on primary -->
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
