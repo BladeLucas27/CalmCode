@@ -14,44 +14,22 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
-class LoginActivity : Activity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        val button_register = findViewById<Button>(R.id.button_register)
-//        button_register.setOnClickListener {
-//            Log.e("Register Button", "Button is clicked")
-//
-//            Toast.makeText(this, "I am clicked!", Toast.LENGTH_LONG).show()
-//            val intent = Intent(this, ProfileActivity::class.java)
-//            startActivity(intent)
-//        }
-
-        val edittext_username = findViewById<EditText>(R.id.edittext_username)
-        val edittext_password = findViewById<EditText>(R.id.edittext_password)
+        val edittext_username = findViewById<TextInputEditText>(R.id.tfUsername)
+        val edittext_password = findViewById<TextInputEditText>(R.id.tfPassword)
         val button_login = findViewById<Button>(R.id.button_login)
         val button_register = findViewById<Button>(R.id.button_register)
-        val togglePassword = findViewById<ImageView>(R.id.toggle_password)
 
-        //password visibility
-        var isPasswordVisible = false
-        edittext_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        togglePassword.setImageResource(R.drawable.eye_1)
-        togglePassword.setOnClickListener {
-            isPasswordVisible = !isPasswordVisible
-            if (isPasswordVisible) {
-                edittext_password.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                togglePassword.setImageResource(R.drawable.eye_1_2)
-            } else {
-                edittext_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                togglePassword.setImageResource(R.drawable.eye_1)
-            }
-            edittext_password.setSelection(edittext_password.text.length)
-        }
 
         button_login.setOnClickListener{
+            Log.e("CalmCode", ":Login button is clicked")
             val username = edittext_username.text.toString().trim()
             val password = edittext_password.text.toString().trim()
 

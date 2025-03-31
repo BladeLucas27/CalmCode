@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.calmcode.app.myApplication
 import java.util.regex.Pattern
 
-class RegisterActivity : Activity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -26,43 +26,8 @@ class RegisterActivity : Activity() {
         val edittext_password = findViewById<EditText>(R.id.edittext_password)
         val edittext_confirm_password = findViewById<EditText>(R.id.edittext_confirm_password)
         val button_register = findViewById<Button>(R.id.button_register)
-        val togglePassword = findViewById<ImageView>(R.id.toggle_password)
-        val toggleConfirmPassword = findViewById<ImageView>(R.id.toggle_confirm_password)
-
-        var isPasswordVisible = false
 
         edittext_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        togglePassword.setImageResource(R.drawable.eye_1)
-
-        // Toggle password visibility
-        togglePassword.setOnClickListener {
-            isPasswordVisible = !isPasswordVisible
-            if (isPasswordVisible) {
-                edittext_password.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                togglePassword.setImageResource(R.drawable.eye_1_2)
-            } else {
-                edittext_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                togglePassword.setImageResource(R.drawable.eye_1)
-            }
-            edittext_password.setSelection(edittext_password.text.length)
-        }
-
-        //for confirm password visibility
-        var isConfirmPasswordVisible = false
-        edittext_confirm_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        toggleConfirmPassword.setImageResource(R.drawable.eye_1)
-        toggleConfirmPassword.setOnClickListener {
-            isConfirmPasswordVisible = !isConfirmPasswordVisible
-            if (isConfirmPasswordVisible) {
-                edittext_confirm_password.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                toggleConfirmPassword.setImageResource(R.drawable.eye_1_2)
-            } else {
-                edittext_confirm_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                toggleConfirmPassword.setImageResource(R.drawable.eye_1)
-            }
-            edittext_confirm_password.setSelection(edittext_password.text.length)
-        }
-
 
         button_register.setOnClickListener {
             val username = edittext_username.text.toString().trim()
@@ -85,8 +50,8 @@ class RegisterActivity : Activity() {
                 editor.putString("password", password)
                 editor.apply()
 
-                (application as myApplication).setUsername(username)
-                (application as myApplication).setPassword(password)
+//                (application as myApplication).setUsername(username)
+//                (application as myApplication).setPassword(password)
 
                 Toast.makeText(this, "Account Created Successfully!", Toast.LENGTH_LONG).show()
 
