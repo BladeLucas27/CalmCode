@@ -6,8 +6,6 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,22 +14,19 @@ import com.example.calmcode.app.myApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 import com.example.calmcode.utils.toast
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 
-class CalmingMusicActivity : Activity() {
+class GroovyMusicActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calming_music)
+        setContentView(R.layout.activity_groovy_music)
 
-        val listView = findViewById<ListView>(R.id.CalmingListView)
+        val listView = findViewById<ListView>(R.id.GroovyListView)
 
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
-            (application as myApplication).calmingMusicList,
+            (application as myApplication).groovyMusicList,
             onClick = {
-                musicTrack ->
+                    musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){

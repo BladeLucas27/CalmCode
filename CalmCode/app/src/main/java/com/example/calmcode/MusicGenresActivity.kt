@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -28,9 +27,9 @@ class MusicGenresActivity : Activity() {
 //            startActivity(Intent(this,CalmingMusicActivity::class.java))
             when (position) {
                 0 -> startActivity(Intent(this,CalmingMusicActivity::class.java))
-//                1 -> startActivity(Intent(this,GroovyMusicActivity::class.java))
-//                2 -> startActivity(Intent(this,RelaxingMusicActivity::class.java))
-//                3 -> startActivity(Intent(this,UpliftingMusicActivity::class.java))
+                1 -> startActivity(Intent(this,GroovyMusicActivity::class.java))
+                2 -> startActivity(Intent(this,RelaxingMusicActivity::class.java))
+                3 -> startActivity(Intent(this,UpliftingMusicActivity::class.java))
             }
         }
 

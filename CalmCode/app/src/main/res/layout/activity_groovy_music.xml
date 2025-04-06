@@ -5,25 +5,25 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalmingMusicActivity"
+    tools:context=".GroovyMusicActivity"
     android:background="@color/blue">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calming Music List"
+        android:text="Groovy Music List"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/CalmingListView"
+        app:layout_constraintEnd_toEndOf="@+id/GroovyListView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/CalmingListView"
+        app:layout_constraintStart_toStartOf="@+id/GroovyListView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
         android:textColor="@color/white"
         android:fontFamily="@font/roboto_medium"/>
 
     <ListView
-        android:id="@+id/CalmingListView"
+        android:id="@+id/GroovyListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
