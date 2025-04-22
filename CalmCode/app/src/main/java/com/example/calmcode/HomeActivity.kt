@@ -75,6 +75,12 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val btnDownloads = findViewById<Button>(R.id.btnDownloads)
+        btnDownloads.setOnClickListener {
+            toast("Going to Music Downloads Selection")
+            intent = Intent(this, MusicDownloadsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         val btnCommunity = findViewById<Button>(R.id.btnCommunity)
         val btnWorkshop = findViewById<Button>(R.id.btnWorkshop)
         val btnCoaching = findViewById<Button>(R.id.btnCoaching)

@@ -62,6 +62,7 @@ class myApplication : Application(){
     val completeMusicList = listOf(
         calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList
     )
+    val downloadList : MutableList<MusicTrack> = mutableListOf()
 
     fun getUsername() : String = this.username
     fun setUsername(username : String) {this.username = username}
@@ -69,8 +70,6 @@ class myApplication : Application(){
     fun setPassword(password : String) {this.password = password}
     fun getEmail() : String = this.email
     fun setEmail(email : String) {this.email = email}
-
-
 
     override fun onCreate() {
         super.onCreate()

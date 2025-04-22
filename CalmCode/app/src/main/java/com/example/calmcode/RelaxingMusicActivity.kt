@@ -2,6 +2,7 @@ package com.example.calmcode
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -103,8 +104,7 @@ class RelaxingMusicActivity : Activity() {
         track.currentStatus = R.drawable.baseline_play_circle_24
         recreate()
     }
-
     fun addToDownloads(track: MusicTrack){
-
+        (application as myApplication).downloadList.add(track)
     }
 }
