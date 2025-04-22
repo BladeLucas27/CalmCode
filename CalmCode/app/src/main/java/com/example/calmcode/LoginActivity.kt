@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
         button_register.setOnClickListener {
             Log.e("CalmCode", "button is clicked")
             Toast.makeText(this, "Opening register screen", Toast.LENGTH_LONG).show()
-            val intent = Intent(    this,MusicGenresActivity::class.java)
+            val intent = Intent(    this,RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
