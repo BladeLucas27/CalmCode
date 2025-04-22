@@ -7,19 +7,10 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.calmcode.app.myApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 import com.example.calmcode.utils.toast
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
 
 class CalmingMusicActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,14 +89,10 @@ class CalmingMusicActivity : Activity() {
                 toast("Erorr playing audio")
                 false
             }
-            (application as myApplication).mediaPlayer?.let {
-                it.setVolume(500.0f, 500.0f)//not working yet :((
-            }
         } catch (e: Exception){
             e.printStackTrace()
             toast("Error loading audio")
         }
-
     }
     fun onStop(track: MusicTrack) {
         super.onStop()

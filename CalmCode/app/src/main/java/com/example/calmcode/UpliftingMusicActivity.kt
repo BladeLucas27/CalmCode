@@ -89,14 +89,10 @@ class UpliftingMusicActivity : Activity() {
                 toast("Erorr playing audio")
                 false
             }
-            (application as myApplication).mediaPlayer?.let {
-                it.setVolume(500.0f, 500.0f)//not working yet :((
-            }
         } catch (e: Exception){
             e.printStackTrace()
             toast("Error loading audio")
         }
-
     }
     fun onStop(track: MusicTrack) {
         super.onStop()
