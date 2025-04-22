@@ -60,10 +60,7 @@ class MusicDownloadsActivity : Activity() {
                 builder.setMessage("Would you like to download this track to your device?")
 
                 builder.setPositiveButton("Download") { dialog, which ->
-
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        download(musicTrack)
-                    }
+                    download(musicTrack)
                     dialog.dismiss()
                 }
                 builder.setNegativeButton("No") { dialog, which ->
