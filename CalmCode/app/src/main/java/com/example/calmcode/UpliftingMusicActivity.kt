@@ -1,6 +1,7 @@
 package com.example.calmcode
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -39,7 +40,25 @@ class UpliftingMusicActivity : Activity() {
                     toast("Stopping Music")
                     onStop(musicTrack)
                 }
+            },
+            onLongClick = {
+                    musicTrack ->
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Add to Downloads")
+                builder.setMessage("Would you like to add this track to the downloads tab?")
+
+                builder.setPositiveButton("Add") { dialog, which ->
+                    addToDownloads(musicTrack)
+                    dialog.dismiss()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+
+                val dialog = builder.create()
+                dialog.show()
             }
+
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
@@ -70,16 +89,11 @@ class UpliftingMusicActivity : Activity() {
                 toast("Erorr playing audio")
                 false
             }
-            (application as myApplication).mediaPlayer?.let {
-                it.setVolume(500.0f, 500.0f)//not working yet :((
-            }
         } catch (e: Exception){
             e.printStackTrace()
             toast("Error loading audio")
         }
-
     }
-
     fun onStop(track: MusicTrack) {
         super.onStop()
         (application as myApplication).mediaPlayer?.stop()
@@ -87,5 +101,8 @@ class UpliftingMusicActivity : Activity() {
         (application as myApplication).mediaPlayer = null
         track.currentStatus = R.drawable.baseline_play_circle_24
         recreate()
+    }
+    fun addToDownloads(track: MusicTrack){
+        (application as myApplication).downloadList.add(track)
     }
 }
