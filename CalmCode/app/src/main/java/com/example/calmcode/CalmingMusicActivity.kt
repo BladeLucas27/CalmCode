@@ -26,7 +26,7 @@ class CalmingMusicActivity : Activity() {
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
             (application as myApplication).calmingMusicList,
-            onClick = {
+            onPromptClick = {
                 musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
@@ -46,6 +46,16 @@ class CalmingMusicActivity : Activity() {
                     onStop(musicTrack)
                 }
             },
+            onFaveClick = {
+                musicTrack ->
+                if(musicTrack.favorite == R.drawable.baseline_favorite_border_24){
+                    toast("Added track to favorites")
+                    addToFavorites(musicTrack)
+                } else{
+                    toast("Removed track from favorites")
+                    removeFromFavorites(musicTrack)
+                }
+            },
             onLongClick = {
                     musicTrack ->
                 val builder = AlertDialog.Builder(this)
@@ -59,7 +69,6 @@ class CalmingMusicActivity : Activity() {
                 builder.setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
                 }
-
                 val dialog = builder.create()
                 dialog.show()
             }
@@ -112,5 +121,15 @@ class CalmingMusicActivity : Activity() {
     }
     fun addToDownloads(track: MusicTrack){
         (application as myApplication).downloadList.add(track)
+    }
+    fun addToFavorites(track: MusicTrack){
+        track.favorite = R.drawable.baseline_favorite_24
+        (application as myApplication).favoritesList.add(track)
+        recreate()
+    }
+    fun removeFromFavorites(track: MusicTrack){
+        track.favorite = R.drawable.baseline_favorite_border_24
+        (application as myApplication).favoritesList.remove(track)
+        recreate()
     }
 }

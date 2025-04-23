@@ -63,6 +63,7 @@ class myApplication : Application(){
         calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList
     )
     val downloadList : MutableList<MusicTrack> = mutableListOf()
+    val favoritesList : MutableList<MusicTrack> = mutableListOf()
 
     fun getUsername() : String = this.username
     fun setUsername(username : String) {this.username = username}

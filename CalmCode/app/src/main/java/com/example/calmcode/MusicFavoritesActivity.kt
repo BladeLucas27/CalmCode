@@ -8,23 +8,27 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.calmcode.app.myApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 import com.example.calmcode.utils.toast
 import com.example.calmcode.utils.updateStreakCounter
 
-class GroovyMusicActivity : Activity() {
+class MusicFavoritesActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_groovy_music)
+        setContentView(R.layout.activity_music_favorites)
 
-        val listView = findViewById<ListView>(R.id.GroovyListView)
+        val listView = findViewById<ListView>(R.id.FavoritesListView)
 
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
-            (application as myApplication).groovyMusicList,
+            (application as myApplication).calmingMusicList,
             onPromptClick = {
                     musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
