@@ -59,12 +59,11 @@ class myApplication : Application(){
         MusicTrack("*Gonna Start v2", 2.minutes + 35.seconds, R.raw.kricketune),
         MusicTrack("*Americana", 3.minutes + 22.seconds, R.raw.kricketune)
     )
-    val completeMusicList = listOf(
-        calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList
-    )
     val downloadList : MutableList<MusicTrack> = mutableListOf()
     val favoritesList : MutableList<MusicTrack> = mutableListOf()
-
+    val completeMusicList = listOf(
+        calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList, favoritesList
+    )
     fun getUsername() : String = this.username
     fun setUsername(username : String) {this.username = username}
     fun getPassword() : String = this.password
