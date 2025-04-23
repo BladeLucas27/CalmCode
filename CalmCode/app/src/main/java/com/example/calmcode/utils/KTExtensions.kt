@@ -1,10 +1,14 @@
 package com.example.calmcode.utils
 
 import android.app.Activity
+import android.content.Context
 import android.widget.EditText
 import android.widget.Toast
 
 fun Activity.toast(toastMessage : String){
+    Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
+}
+fun Context.toast(toastMessage: String) {
     Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
 }
 

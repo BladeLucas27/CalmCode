@@ -27,8 +27,6 @@ class RegisterActivity : AppCompatActivity() {
         val edittext_confirm_password = findViewById<EditText>(R.id.edittext_confirm_password)
         val button_register = findViewById<Button>(R.id.button_register)
 
-        edittext_password.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-
         button_register.setOnClickListener {
             val username = edittext_username.text.toString().trim()
             val password = edittext_password.text.toString().trim()

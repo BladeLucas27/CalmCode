@@ -38,9 +38,10 @@ class EditProfileActivity : Activity() {
             (application as myApplication).setPassword(etPass.getString())
             (application as myApplication).setEmail(etEmail.getString())
             toast("Saved!")
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-            finish()
+//            val intent = Intent(this, ProfileActivity::class.java)
+//
+//            startActivity(intent)
+//            finish()
         }
     }
 }

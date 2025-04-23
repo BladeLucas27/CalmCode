@@ -47,10 +47,20 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    viewBinding {
+        enable = true
+    }
+
 }
 
 dependencies {
-
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit core
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // JSON to Kotlin
+    implementation("androidx.webkit:webkit:1.8.0") // For WebView enhancements (optional)
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation(libs.ucrop)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
