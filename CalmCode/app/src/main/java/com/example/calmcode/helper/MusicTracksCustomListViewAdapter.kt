@@ -20,7 +20,7 @@ import org.w3c.dom.Text
 import java.util.concurrent.TimeUnit
 
 class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
-    private val onClick: (MusicTrack) -> Unit) : BaseAdapter() {
+    private val onClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
         private var countDownTimer: CountDownTimer? = null
         private var mediaPlayer: MediaPlayer? = null
         private val handler = Handler(Looper.getMainLooper())
@@ -46,18 +46,14 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
 
         view.setOnClickListener {
             onClick(musicTrack)
-//            if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
-//                println("Music Played")
-////                musicTrack.currentStatus = R.drawable.baseline_play_circle_24
-//                startTimer(musicTrack, buttonPic)
-////                playMusic(context, musicTrack, progressbarTrack, musicLengthCurrent)
-//            } else if(musicTrack.currentStatus == R.drawable.baseline_pause_circle_24){
-//                println("Music Paused")
-//                musicTrack.currentStatus = R.drawable.baseline_play_circle_24
-//                startTimer(musicTrack, buttonPic)
-////                countDownTimer?.cancel()
-//            }
         }
+
+        view.setOnLongClickListener {
+            onLongClick(musicTrack)
+            true
+        }
+
+
         return view
     }
     private fun startTimer(track: MusicTrack, currentStatus: ImageButton){

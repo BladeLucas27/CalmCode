@@ -41,6 +41,37 @@ class HomeActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+
+            drawerLayout.closeDrawers()
+            true
+        }
+        val btnDaily = findViewById<Button>(R.id.btnDaily)
+        val btnCourse = findViewById<Button>(R.id.btnCourse)
+        val btnFavorite = findViewById<Button>(R.id.btnFavorite)
+        btnFavorite.setOnClickListener {
+            toast("Going to Music Selection")
+            intent = Intent(this, MusicGenresActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        val btnDownloads = findViewById<Button>(R.id.btnDownloads)
+        btnDownloads.setOnClickListener {
+            toast("Going to Music Downloads Selection")
+            intent = Intent(this, MusicDownloadsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        val btnCommunity = findViewById<Button>(R.id.btnCommunity)
+        val btnWorkshop = findViewById<Button>(R.id.btnWorkshop)
+        val btnCoaching = findViewById<Button>(R.id.btnCoaching)
+        val btnPlans = findViewById<Button>(R.id.btnPlans)
+
+        btnDaily.setOnClickListener {
+            Toast.makeText(this, "Opening Genre Selection screen", Toast.LENGTH_LONG).show()
+            val intent = Intent(    this,MusicGenresActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
