@@ -44,7 +44,7 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
             if(seconds >= 10)"${minutes}:${seconds}"
             else "${minutes}:0${seconds}" })
 
-        view.setOnClickListener {
+        buttonPic.setOnClickListener {
             onClick(musicTrack)
         }
 
