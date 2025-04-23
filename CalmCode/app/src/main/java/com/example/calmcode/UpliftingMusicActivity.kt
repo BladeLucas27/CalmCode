@@ -4,13 +4,16 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
+import androidx.annotation.RequiresApi
 import com.example.calmcode.app.myApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 import com.example.calmcode.utils.toast
+import com.example.calmcode.utils.updateStreakCounter
 
 class UpliftingMusicActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +24,7 @@ class UpliftingMusicActivity : Activity() {
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
             (application as myApplication).upliftingMusicList,
-            onClick = {
+            onPromptClick = {
                     musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
@@ -41,6 +44,16 @@ class UpliftingMusicActivity : Activity() {
                     onStop(musicTrack)
                 }
             },
+            onFaveClick = {
+                    musicTrack ->
+                if(musicTrack.favorite == R.drawable.baseline_favorite_border_24){
+                    toast("Added track to favorites")
+                    addToFavorites(musicTrack)
+                } else{
+                    toast("Removed track from favorites")
+                    removeFromFavorites(musicTrack)
+                }
+            },
             onLongClick = {
                     musicTrack ->
                 val builder = AlertDialog.Builder(this)
@@ -54,11 +67,9 @@ class UpliftingMusicActivity : Activity() {
                 builder.setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
                 }
-
                 val dialog = builder.create()
                 dialog.show()
             }
-
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
@@ -66,6 +77,7 @@ class UpliftingMusicActivity : Activity() {
             finish()
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun playMusic(track: MusicTrack) {
         val selectedMusic = track
         (application as myApplication).mediaPlayer?.release()
@@ -80,6 +92,9 @@ class UpliftingMusicActivity : Activity() {
             }
             (application as myApplication).mediaPlayer?.setOnCompletionListener {
                 toast("${selectedMusic.trackName} finished")
+
+                updateStreakCounter(this)
+
                 (application as myApplication).mediaPlayer = null
                 track.currentStatus = R.drawable.baseline_play_circle_24
                 recreate()
@@ -104,5 +119,15 @@ class UpliftingMusicActivity : Activity() {
     }
     fun addToDownloads(track: MusicTrack){
         (application as myApplication).downloadList.add(track)
+    }
+    fun addToFavorites(track: MusicTrack){
+        track.favorite = R.drawable.baseline_favorite_24
+        (application as myApplication).favoritesList.add(track)
+        recreate()
+    }
+    fun removeFromFavorites(track: MusicTrack){
+        track.favorite = R.drawable.baseline_favorite_border_24
+        (application as myApplication).favoritesList.remove(track)
+        recreate()
     }
 }

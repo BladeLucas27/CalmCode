@@ -20,7 +20,7 @@ import org.w3c.dom.Text
 import java.util.concurrent.TimeUnit
 
 class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
-    private val onClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
+    private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
         private var countDownTimer: CountDownTimer? = null
         private var mediaPlayer: MediaPlayer? = null
         private val handler = Handler(Looper.getMainLooper())
@@ -33,21 +33,25 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
             , parent, false)
         val musicTrack = musicList[position]
 
-        val buttonPic = view.findViewById<ImageButton>(R.id.ivMusicButton)
+        val playPic = view.findViewById<ImageButton>(R.id.ivMusicButton)
         val musicName = view.findViewById<TextView>(R.id.tvMusicTrackName)
         val musicLength = view.findViewById<TextView>(R.id.tvMusicTrackLength)
+        val favPic = view.findViewById<ImageButton>(R.id.ivFavoriteButton)
 //        val progressbarTrack = view.findViewById<ProgressBar>(R.id.progressbarTrack)
 //        val musicLengthCurrent = view.findViewById<TextView>(R.id.tvMusicTrackCurrent)
-        buttonPic.setImageResource(musicTrack.currentStatus)
+        playPic.setImageResource(musicTrack.currentStatus)
         musicName.setText(musicTrack.trackName)
+        favPic.setImageResource(musicTrack.favorite)
         musicLength.setText(musicTrack.trackLength?.toComponents{ _, minutes, seconds, _ ->
             if(seconds >= 10)"${minutes}:${seconds}"
             else "${minutes}:0${seconds}" })
 
-        buttonPic.setOnClickListener {
-            onClick(musicTrack)
+        playPic.setOnClickListener {
+            onPromptClick(musicTrack)
         }
-
+        favPic.setOnClickListener {
+            onFaveClick(musicTrack)
+        }
         view.setOnLongClickListener {
             onLongClick(musicTrack)
             true

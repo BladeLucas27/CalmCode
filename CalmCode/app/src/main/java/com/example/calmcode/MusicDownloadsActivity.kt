@@ -33,7 +33,7 @@ class MusicDownloadsActivity : Activity() {
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
             (application as myApplication).downloadList,
-            onClick = {
+            onPromptClick = {
                 musicTrack ->
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Download Track to Device")
@@ -42,6 +42,23 @@ class MusicDownloadsActivity : Activity() {
                 builder.setPositiveButton("Download") { dialog, which ->
                     download(musicTrack)
                     dialog.dismiss()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+            },
+            onFaveClick = {
+                musicTrack ->
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Remove Track from Downloads")
+                builder.setMessage("Would you like to remove this track from the download page?")
+
+                builder.setPositiveButton("Remove") { dialog, which ->
+                    removeFromDownloads(musicTrack)
+                    dialog.dismiss()
+                    recreate()
                 }
                 builder.setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
