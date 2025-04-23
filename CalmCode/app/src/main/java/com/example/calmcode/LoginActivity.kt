@@ -12,15 +12,17 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
 
         val edittext_username = findViewById<TextInputEditText>(R.id.tfUsername)
         val edittext_password = findViewById<TextInputEditText>(R.id.tfPassword)
@@ -58,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         button_register.setOnClickListener {
             Log.e("CalmCode", "button is clicked")
             Toast.makeText(this, "Opening register screen", Toast.LENGTH_LONG).show()
-            val intent = Intent(    this,RegisterActivity::class.java)
+            val intent = Intent(    this,HomeActivity::class.java)
             startActivity(intent)
             finish()
         }

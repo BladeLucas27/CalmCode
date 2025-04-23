@@ -4,15 +4,19 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
+import androidx.annotation.RequiresApi
 import com.example.calmcode.app.myApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 import com.example.calmcode.utils.toast
+import com.example.calmcode.utils.updateStreakCounter
 
 class CalmingMusicActivity : Activity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calming_music)
@@ -66,6 +70,7 @@ class CalmingMusicActivity : Activity() {
             finish()
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun playMusic(track: MusicTrack) {
         val selectedMusic = track
         (application as myApplication).mediaPlayer?.release()
@@ -80,6 +85,9 @@ class CalmingMusicActivity : Activity() {
             }
             (application as myApplication).mediaPlayer?.setOnCompletionListener {
                 toast("${selectedMusic.trackName} finished")
+
+                updateStreakCounter(this)
+
                 (application as myApplication).mediaPlayer = null
                 track.currentStatus = R.drawable.baseline_play_circle_24
                 recreate()

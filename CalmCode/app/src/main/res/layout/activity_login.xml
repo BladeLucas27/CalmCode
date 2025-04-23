@@ -5,10 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
+    android:background="#1e1d1d"
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+
+    </ScrollView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username"
@@ -17,6 +29,7 @@
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="28dp"
         android:hint="Username"
+        app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +39,9 @@
             android:id="@+id/tfUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:inputType="text"
-            android:textColor="?attr/colorOnBackground"/>
+            android:textColor="?attr/colorOnBackground" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,8 +53,8 @@
         android:layout_marginTop="16dp"
         android:hint="Password"
         app:endIconMode="password_toggle"
+        app:layout_constraintBottom_toTopOf="@+id/button_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username">
 
@@ -48,8 +62,9 @@
             android:id="@+id/tfPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:inputType="textPassword"
-            android:textColor="?attr/colorOnBackground"/>
+            android:textColor="?attr/colorOnBackground" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -58,9 +73,11 @@
         android:layout_width="184dp"
         android:layout_height="56dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Login"
         android:textColor="?attr/colorOnBackground"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,20 +91,34 @@
         android:text="Don't have an account? Register here"
         android:textColor="#2986cc"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="@integer/material_motion_duration_long_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login"
-        app:layout_constraintVertical_weight="@integer/material_motion_duration_long_1" />
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="163dp"
         android:layout_height="153dp"
-        android:layout_marginTop="136dp"
+        app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12"
+        app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/logo2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

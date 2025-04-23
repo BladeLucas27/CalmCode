@@ -4,4 +4,7 @@
     <string name="email">____________________________</string>
     <string name="drawer_close">close</string>
     <string name="drawer_open">open</string>
+    <string name="title_activity_login">Login</string>
+    <string name="news_api_key">356b36bdfda5453289013dfc7f8f6ed5</string>
+
 </resources>
