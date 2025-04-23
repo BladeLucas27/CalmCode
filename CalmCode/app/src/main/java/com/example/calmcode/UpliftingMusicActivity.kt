@@ -45,7 +45,7 @@ class UpliftingMusicActivity : Activity() {
                     musicTrack ->
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Add to Downloads")
-                builder.setMessage("Would you like to add this track to the downloads tab?")
+                builder.setMessage("Would you like to add this track to the downloads page?")
 
                 builder.setPositiveButton("Add") { dialog, which ->
                     addToDownloads(musicTrack)

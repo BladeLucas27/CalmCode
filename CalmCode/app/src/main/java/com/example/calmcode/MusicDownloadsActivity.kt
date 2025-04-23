@@ -35,26 +35,6 @@ class MusicDownloadsActivity : Activity() {
             (application as myApplication).downloadList,
             onClick = {
                 musicTrack ->
-//                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
-
-                if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
-                    toast("Playing Music")
-                    for(m in (application as myApplication).completeMusicList){
-                        for(c in m){
-                            if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
-                                onStop(c)
-                            }
-                        }
-                    }
-                    playMusic(musicTrack)
-                } else{
-                    (application as myApplication).isSongPlaying = 0
-                    toast("Stopping Music")
-                    onStop(musicTrack)
-                }
-            },
-            onLongClick = {
-                musicTrack ->
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Download Track to Device")
                 builder.setMessage("Would you like to download this track to your device?")
@@ -62,6 +42,23 @@ class MusicDownloadsActivity : Activity() {
                 builder.setPositiveButton("Download") { dialog, which ->
                     download(musicTrack)
                     dialog.dismiss()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+            },
+            onLongClick = {
+                musicTrack ->
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Remove Track from Downloads")
+                builder.setMessage("Would you like to remove this track from the download page?")
+
+                builder.setPositiveButton("Remove") { dialog, which ->
+                    removeFromDownloads(musicTrack)
+                    dialog.dismiss()
+                    recreate()
                 }
                 builder.setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
@@ -76,70 +73,7 @@ class MusicDownloadsActivity : Activity() {
             finish()
         }
     }
-    private fun playMusic(track: MusicTrack) {
-        val selectedMusic = track
-        (application as myApplication).mediaPlayer?.release()
-        (application as myApplication).mediaPlayer = null
-        try{
-            (application as myApplication).mediaPlayer = MediaPlayer.create(this, selectedMusic.music)
-            (application as myApplication).mediaPlayer?.setOnPreparedListener {
-                (application as myApplication).mediaPlayer?.start()
-                selectedMusic.currentStatus = R.drawable.baseline_pause_circle_24
-                recreate()
-                (application as myApplication).isSongPlaying = 1
-            }
-            (application as myApplication).mediaPlayer?.setOnCompletionListener {
-                toast("${selectedMusic.trackName} finished")
-                (application as myApplication).mediaPlayer = null
-                track.currentStatus = R.drawable.baseline_play_circle_24
-                recreate()
-                (application as myApplication).isSongPlaying = 0
-            }
-            (application as myApplication).mediaPlayer?.setOnErrorListener { mp, what, extra ->
-                toast("Erorr playing audio")
-                false
-            }
-        } catch (e: Exception){
-            e.printStackTrace()
-            toast("Error loading audio")
-        }
-
-    }
-    fun onStop(track: MusicTrack) {
-        super.onStop()
-        (application as myApplication).mediaPlayer?.stop()
-        (application as myApplication).mediaPlayer?.release()
-        (application as myApplication).mediaPlayer = null
-        track.currentStatus = R.drawable.baseline_play_circle_24
-        recreate()
-    }
-
     fun download(track: MusicTrack){
-//        val inputStream: InputStream? = try {
-//            resources.openRawResource(track.music)
-//        } catch (e: Exception){
-//            toast("Cannot find raw resource")
-//            e.printStackTrace()
-//            return
-//        }
-//        if(inputStream != null){
-//            val outputDir = filesDir
-//            val outputFile = File(outputDir, track.trackName)
-//            try{
-//                val outputStream = FileOutputStream(outputFile)
-//                val buffer = ByteArray(4 * 1024)
-//                var bytesRead: Int
-//                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
-//                    outputStream.write(buffer, 0, bytesRead)
-//                }
-//                outputStream.close()
-//                inputStream.close()
-//                toast("File downloaded to: ${outputFile.absolutePath}")
-//            } catch (e: IOException){
-//                toast("Error saving file")
-//                e.printStackTrace()
-//            }
-//        }
         val inputStream: InputStream? = try {
             resources.openRawResource(track.music)
         } catch (e: Exception){
@@ -181,5 +115,8 @@ class MusicDownloadsActivity : Activity() {
             }
             toast("Error creating download entry")
         }
+    }
+    fun removeFromDownloads(track: MusicTrack){
+        (application as myApplication).downloadList.remove(track)
     }
 }

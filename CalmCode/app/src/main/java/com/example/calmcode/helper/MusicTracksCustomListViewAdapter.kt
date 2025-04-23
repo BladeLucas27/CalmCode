@@ -41,7 +41,7 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
         buttonPic.setImageResource(musicTrack.currentStatus)
         musicName.setText(musicTrack.trackName)
         musicLength.setText(musicTrack.trackLength?.toComponents{ _, minutes, seconds, _ ->
-            if(seconds > 10)"${minutes}:${seconds}"
+            if(seconds >= 10)"${minutes}:${seconds}"
             else "${minutes}:0${seconds}" })
 
         view.setOnClickListener {
@@ -52,8 +52,6 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
             onLongClick(musicTrack)
             true
         }
-
-
         return view
     }
     private fun startTimer(track: MusicTrack, currentStatus: ImageButton){
