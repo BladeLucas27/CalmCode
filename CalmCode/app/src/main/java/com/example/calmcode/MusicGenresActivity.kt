@@ -20,6 +20,7 @@ class MusicGenresActivity : Activity() {
 
         val genreList = mutableListOf("Calming", "Groovy", "Relaxing", "Uplifting", "Your Favorites")
 
+
         lvGenres.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, genreList)
 
         lvGenres.setOnItemClickListener { _, _, position, _ ->

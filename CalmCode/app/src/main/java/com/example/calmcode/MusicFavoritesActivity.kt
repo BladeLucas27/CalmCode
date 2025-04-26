@@ -28,7 +28,7 @@ class MusicFavoritesActivity : Activity() {
 
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
-            (application as myApplication).calmingMusicList,
+            (application as myApplication).favoritesList,
             onPromptClick = {
                     musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
@@ -55,8 +55,19 @@ class MusicFavoritesActivity : Activity() {
                     toast("Added track to favorites")
                     addToFavorites(musicTrack)
                 } else{
-                    toast("Removed track from favorites")
-                    removeFromFavorites(musicTrack)
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Remove from Favorites?")
+                    builder.setMessage("Would you like to remove this track from the favorites page?")
+
+                    builder.setPositiveButton("Remove") { dialog, which ->
+                        toast("Removed track from favorites")
+                        removeFromFavorites(musicTrack)
+                    }
+                    builder.setNegativeButton("No") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    val dialog = builder.create()
+                    dialog.show()
                 }
             },
             onLongClick = {

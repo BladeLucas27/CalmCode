@@ -129,6 +129,11 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "Going to Music Selection", Toast.LENGTH_SHORT).show()
             startActivity(Intent(requireContext(), MusicGenresActivity::class.java))
         }
+
+        btnDownloads.setOnClickListener {
+            Toast.makeText(requireContext(), "Going to Downloads Selection", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), MusicDownloadsActivity::class.java))
+        }
     }
     private fun getGreetingMessage(): String {
         val calendar = Calendar.getInstance()
