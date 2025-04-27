@@ -8,7 +8,7 @@ import com.example.calmcode.data.MusicTrack
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
-class myApplication : Application(){
+class calmcodeApplication : Application(){
     private var username : String = ""
     private var password : String = ""
     private var email : String = ""
@@ -22,7 +22,7 @@ class myApplication : Application(){
         MusicTrack("Evening", 3.minutes + 6.seconds, R.raw.evening),
         MusicTrack("*Late Night Radio", 4.minutes + 24.seconds, R.raw.kricketune),
         MusicTrack("*A Very Brady Special", 6.minutes + 28.seconds, R.raw.kricketune),
-        MusicTrack("*Deep Relaxation", 51.minutes + 8.seconds, R.raw.kricketune),
+        MusicTrack("*Sincerely", 6.minutes + 15.seconds, R.raw.kricketune),
         MusicTrack("*Wholesome", 6.minutes + 4.seconds, R.raw.kricketune),
         MusicTrack("*Past Sadness", 3.minutes + 33.seconds, R.raw.kricketune),
     )
@@ -33,7 +33,7 @@ class myApplication : Application(){
         MusicTrack("*Space Jazz", 6.minutes + 10.seconds, R.raw.kricketune),
         MusicTrack("*Smooth Lovin", 4.minutes + 19.seconds, R.raw.kricketune),
         MusicTrack("*Bossa Antigua", 4.minutes + 43.seconds, R.raw.kricketune),
-        MusicTrack("Bummin on Tremelo", 3.minutes + 12.seconds, R.raw.kricketune),//7
+        MusicTrack("Bummin on Tremelo", 3.minutes + 12.seconds, R.raw.kricketune),
         MusicTrack("*Shaving Mirror", 3.minutes + 26.seconds, R.raw.kricketune),
         MusicTrack("*Poppers and Prosecco", 3.minutes + 14.seconds, R.raw.kricketune)
     )
@@ -42,8 +42,8 @@ class myApplication : Application(){
         MusicTrack("*Ethereal Relaxation", 28.minutes + 6.seconds, R.raw.kricketune),
         MusicTrack("*Space Jazz", 6.minutes + 10.seconds, R.raw.kricketune),
         MusicTrack("Gymnopedie No 1", 3.minutes + 7.seconds, R.raw.gymnopedie_no_1),
-        MusicTrack("*Sincerely", 6.minutes + 15.seconds, R.raw.kricketune),
-        MusicTrack("*Almost Bliss", 5.minutes + 17.seconds, R.raw.kricketune),//6
+        MusicTrack("*Pepper's Theme", 3.minutes + 34.seconds, R.raw.kricketune),
+        MusicTrack("*Almost Bliss", 5.minutes + 17.seconds, R.raw.kricketune),
         MusicTrack("*Angel Share", 3.minutes + 21.seconds, R.raw.kricketune),
         MusicTrack("*Bittersweet", 3.minutes + 22.seconds, R.raw.kricketune),
         MusicTrack("*Dewdrop Fantasy", 34.minutes + 58.seconds, R.raw.kricketune),
@@ -59,12 +59,11 @@ class myApplication : Application(){
         MusicTrack("*Gonna Start v2", 2.minutes + 35.seconds, R.raw.kricketune),
         MusicTrack("*Americana", 3.minutes + 22.seconds, R.raw.kricketune)
     )
-    val completeMusicList = listOf(
-        calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList
-    )
     val downloadList : MutableList<MusicTrack> = mutableListOf()
     val favoritesList : MutableList<MusicTrack> = mutableListOf()
-
+    val completeMusicList = listOf(
+        calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList, favoritesList
+    )
     fun getUsername() : String = this.username
     fun setUsername(username : String) {this.username = username}
     fun getPassword() : String = this.password

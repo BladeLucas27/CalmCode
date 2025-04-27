@@ -18,7 +18,8 @@ class MusicGenresActivity : Activity() {
 
         val lvGenres = findViewById<ListView>(R.id.lvGenres)
 
-        val genreList = mutableListOf("Calming", "Groovy", "Relaxing", "Uplifting")
+        val genreList = mutableListOf("Calming", "Groovy", "Relaxing", "Uplifting", "Your Favorites")
+
 
         lvGenres.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, genreList)
 
@@ -30,6 +31,7 @@ class MusicGenresActivity : Activity() {
                 1 -> startActivity(Intent(this,GroovyMusicActivity::class.java))
                 2 -> startActivity(Intent(this,RelaxingMusicActivity::class.java))
                 3 -> startActivity(Intent(this,UpliftingMusicActivity::class.java))
+                4 -> startActivity(Intent(this,MusicFavoritesActivity::class.java))
             }
         }
 

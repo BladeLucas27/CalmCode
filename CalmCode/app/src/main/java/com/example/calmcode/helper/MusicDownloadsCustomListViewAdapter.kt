@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +13,14 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.example.calmcode.R
 import com.example.calmcode.data.MusicTrack
+import org.w3c.dom.Text
 import java.util.concurrent.TimeUnit
 
-class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
-                                       private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
+class MusicDownloadsCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
+                                          private val onPromptClick: (MusicTrack) -> Unit, private val onDownloadClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
         private var countDownTimer: CountDownTimer? = null
         private var mediaPlayer: MediaPlayer? = null
         private val handler = Handler(Looper.getMainLooper())
@@ -26,19 +29,19 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
     override fun getItem(position: Int): Any = musicList[position]
     override fun getItemId(position: Int): Long = position.toLong()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.template_custom_musictracks
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.template_custom_musicdownloads
             , parent, false)
         val musicTrack = musicList[position]
 
         val playPic = view.findViewById<ImageButton>(R.id.ivMusicButton)
         val musicName = view.findViewById<TextView>(R.id.tvMusicTrackName)
         val musicLength = view.findViewById<TextView>(R.id.tvMusicTrackLength)
-        val favPic = view.findViewById<ImageButton>(R.id.ivFavoriteButton)
+        val downloadPic = view.findViewById<ImageButton>(R.id.ivDownloadButton)
 //        val progressbarTrack = view.findViewById<ProgressBar>(R.id.progressbarTrack)
 //        val musicLengthCurrent = view.findViewById<TextView>(R.id.tvMusicTrackCurrent)
         playPic.setImageResource(musicTrack.currentStatus)
         musicName.setText(musicTrack.trackName)
-        favPic.setImageResource(musicTrack.favorite)
+        downloadPic.setImageResource(R.drawable.baseline_download_for_offline_24)
         musicLength.setText(musicTrack.trackLength?.toComponents{ _, minutes, seconds, _ ->
             if(seconds >= 10)"${minutes}:${seconds}"
             else "${minutes}:0${seconds}" })
@@ -46,8 +49,8 @@ class MusicTracksCustomListViewAdapter(private val context: Context, private val
         playPic.setOnClickListener {
             onPromptClick(musicTrack)
         }
-        favPic.setOnClickListener {
-            onFaveClick(musicTrack)
+        downloadPic.setOnClickListener {
+            onDownloadClick(musicTrack)
         }
         view.setOnLongClickListener {
             onLongClick(musicTrack)

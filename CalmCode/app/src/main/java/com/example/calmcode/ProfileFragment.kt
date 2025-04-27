@@ -19,10 +19,9 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.example.calmcode.app.myApplication
+import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.utils.toast
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
@@ -81,8 +80,8 @@ class ProfileFragment : Fragment() {
 //        }
 
         // Set user data
-        tvUsername.text = (requireActivity().application as myApplication).getUsername()
-        tvEmail.text = (requireActivity().application as myApplication).getEmail()
+        tvUsername.text = (requireActivity().application as calmcodeApplication).getUsername()
+        tvEmail.text = (requireActivity().application as calmcodeApplication).getEmail()
         loadBirthday()?.let {
             val sdf = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
             tvBirthday.text = "Birthday: ${sdf.format(it)}"
