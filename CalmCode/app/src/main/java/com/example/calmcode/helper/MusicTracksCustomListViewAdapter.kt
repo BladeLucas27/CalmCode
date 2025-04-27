@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +12,12 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import com.example.calmcode.R
 import com.example.calmcode.data.MusicTrack
-import org.w3c.dom.Text
 import java.util.concurrent.TimeUnit
 
 class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
-    private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
+                                       private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
         private var countDownTimer: CountDownTimer? = null
         private var mediaPlayer: MediaPlayer? = null
         private val handler = Handler(Looper.getMainLooper())
