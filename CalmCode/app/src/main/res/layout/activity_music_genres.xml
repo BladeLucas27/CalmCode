@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MusicGenresActivity"
-    android:background="@color/blue">
+    android:background="#1E1E1E">
 
     <TextView
         android:id="@+id/tvLabel"
@@ -26,9 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:divider="@color/blue"
+        android:divider="#1E1E1E"
         android:dividerHeight="16dp"
-        android:background="@color/navy_blue"
+        android:background="@color/midnight_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/backarrow"
+        android:background="@drawable/backarrowblue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"

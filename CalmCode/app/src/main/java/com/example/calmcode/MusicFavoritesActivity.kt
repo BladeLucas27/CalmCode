@@ -25,10 +25,8 @@ class MusicFavoritesActivity : Activity() {
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
             (application as calmcodeApplication).favoritesList,
-            onPromptClick = {
-                    musicTrack ->
+            onPromptClick = { musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
-
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                     toast("Playing Music")
                     for(m in (application as calmcodeApplication).completeMusicList){
@@ -45,42 +43,37 @@ class MusicFavoritesActivity : Activity() {
                     onStop(musicTrack)
                 }
             },
-            onFaveClick = {
-                    musicTrack ->
-                if(musicTrack.favorite == R.drawable.baseline_favorite_border_24){
-                    toast("Added track to favorites")
-                    addToFavorites(musicTrack)
-                } else{
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Remove from Favorites?")
-                    builder.setMessage("Would you like to remove this track from the favorites page?")
+            onFaveClick = { musicTrack ->
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Remove from Favorites?")
+                builder.setMessage("Would you like to remove this track from the favorites page?")
 
-                    builder.setPositiveButton("Remove") { dialog, which ->
-                        toast("Removed track from favorites")
-                        removeFromFavorites(musicTrack)
-                    }
-                    builder.setNegativeButton("No") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    val dialog = builder.create()
-                    dialog.show()
+                builder.setPositiveButton("Remove") { dialog, which ->
+                    toast("Removed track from favorites")
+                    removeFromFavorites(musicTrack)
                 }
-            }
-        ) { musicTrack ->
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Add to Downloads")
-            builder.setMessage("Would you like to add this track to the downloads page?")
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+            },
+            onLongClick = { musicTrack ->
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Add to Downloads")
+                builder.setMessage("Would you like to add this track to the downloads page?")
 
-            builder.setPositiveButton("Add") { dialog, which ->
-                addToDownloads(musicTrack)
-                dialog.dismiss()
+                builder.setPositiveButton("Add") { dialog, which ->
+                    addToDownloads(musicTrack)
+                    dialog.dismiss()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
             }
-            builder.setNegativeButton("No") { dialog, which ->
-                dialog.dismiss()
-            }
-            val dialog = builder.create()
-            dialog.show()
-        }
+        )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
             startActivity(Intent(this, MusicGenresActivity::class.java))
@@ -130,14 +123,16 @@ class MusicFavoritesActivity : Activity() {
     fun addToDownloads(track: MusicTrack){
         (application as calmcodeApplication).downloadList.add(track)
     }
-    fun addToFavorites(track: MusicTrack){
-        track.favorite = R.drawable.baseline_favorite_24
-        (application as calmcodeApplication).favoritesList.add(track)
-        recreate()
-    }
     fun removeFromFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_border_24
         (application as calmcodeApplication).favoritesList.remove(track)
+        (application as calmcodeApplication).genreList[4].favoriteCount--
+        when(track.genre){
+            "Calming" -> (application as calmcodeApplication).genreList[0].favoriteCount--
+            "Groovy" -> (application as calmcodeApplication).genreList[1].favoriteCount--
+            "Relaxing" -> (application as calmcodeApplication).genreList[2].favoriteCount--
+            "Uplifting" -> (application as calmcodeApplication).genreList[3].favoriteCount--
+        }
         recreate()
     }
 }
