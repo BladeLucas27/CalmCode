@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CalmingMusicActivity"
-    android:background="@color/blue">
+    android:background="#1E1E1E">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:divider="@color/blue"
+        android:divider="#1E1E1E"
         android:dividerHeight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -38,7 +38,7 @@
         android:id="@+id/btnBack"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/backarrow"
+        android:background="@drawable/backarrowblue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.025"

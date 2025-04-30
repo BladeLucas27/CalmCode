@@ -54,22 +54,23 @@ class GroovyMusicActivity : Activity() {
                     toast("Removed track from favorites")
                     removeFromFavorites(musicTrack)
                 }
-            }
-        ) { musicTrack ->
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Add to Downloads")
-            builder.setMessage("Would you like to add this track to the downloads page?")
+            },
+            onLongClick = { musicTrack ->
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Add to Downloads")
+                builder.setMessage("Would you like to add this track to the downloads page?")
 
-            builder.setPositiveButton("Add") { dialog, which ->
-                addToDownloads(musicTrack)
-                dialog.dismiss()
+                builder.setPositiveButton("Add") { dialog, which ->
+                    addToDownloads(musicTrack)
+                    dialog.dismiss()
+                }
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
             }
-            builder.setNegativeButton("No") { dialog, which ->
-                dialog.dismiss()
-            }
-            val dialog = builder.create()
-            dialog.show()
-        }
+        )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
             startActivity(Intent(this, MusicGenresActivity::class.java))
@@ -122,11 +123,15 @@ class GroovyMusicActivity : Activity() {
     fun addToFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_24
         (application as calmcodeApplication).favoritesList.add(track)
+        (application as calmcodeApplication).genreList[1].favoriteCount++
+        (application as calmcodeApplication).genreList[4].favoriteCount++
         recreate()
     }
     fun removeFromFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_border_24
         (application as calmcodeApplication).favoritesList.remove(track)
+        (application as calmcodeApplication).genreList[1].favoriteCount--
+        (application as calmcodeApplication).genreList[4].favoriteCount--
         recreate()
     }
 }

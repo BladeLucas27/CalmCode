@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     android:background="#2f2e36"
     android:paddingVertical="10dp">
-    <ImageButton
-        android:id="@+id/ivMusicButton"
+    <ImageView
+        android:id="@+id/ibGenreIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:background="@drawable/baseline_play_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
@@ -18,41 +17,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         />
-    <ImageButton
-        android:id="@+id/ivFavoriteButton"
+    <ImageView
+        android:id="@+id/ibFavoriteCount"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:background="@drawable/baseline_favorite_border_24"
+        android:background="@drawable/baseline_favorite_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/tvMusicTrackName"
+        android:id="@+id/tvGenreName"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        android:textColor="@color/white"
-        android:textAlignment="viewStart"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/tvMusicTrackLength"
+        android:id="@+id/tvFavoriteCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_regular"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/midnight_blue"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        android:textColor="@color/white"/>
+        app:layout_constraintVertical_bias="0.499" />
 </androidx.constraintlayout.widget.ConstraintLayout>
