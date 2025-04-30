@@ -4,14 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.ListView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.helper.MusicGenresCustomListViewAdapter
-import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 
 class MusicGenresActivity : Activity() {
     @RequiresApi(Build.VERSION_CODES.O)

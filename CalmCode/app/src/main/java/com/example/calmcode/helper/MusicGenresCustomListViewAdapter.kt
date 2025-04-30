@@ -9,11 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.calmcode.R
 import com.example.calmcode.data.Genre
-import com.example.calmcode.data.MusicTrack
-
-class MusicGenresCustomListViewAdapter(private val context: Context, private val genreList: List<Genre>
-                                       ,private val onPromptClick: (Genre) -> Unit
-) : BaseAdapter() {
+class MusicGenresCustomListViewAdapter(private val context: Context, private val genreList: List<Genre>,
+                                       private val onPromptClick: (Genre) -> Unit) : BaseAdapter() {
     override fun getCount(): Int = genreList.size
 
     override fun getItem(position: Int): Any = genreList[position]
