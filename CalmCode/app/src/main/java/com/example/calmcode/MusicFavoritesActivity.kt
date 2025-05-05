@@ -76,8 +76,17 @@ class MusicFavoritesActivity : AppCompatActivity() {
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
-            startActivity(Intent(this, MusicGenresActivity::class.java))
-            finish()
+            val fromActivity = intent.getStringExtra("FROM_ACTIVITY")
+            when(fromActivity){
+                "GENRES" -> {
+                    startActivity(Intent(this, MusicGenresActivity::class.java))
+                    finish()
+                }
+                "HOME" -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                }
+            }
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
