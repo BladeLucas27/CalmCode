@@ -1,16 +1,18 @@
 package com.example.calmcode
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.helper.MusicGenresCustomListViewAdapter
+import com.example.calmcode.utils.toast
 
-class MusicGenresActivity : Activity() {
+class MusicGenresActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +25,13 @@ class MusicGenresActivity : Activity() {
             (application as calmcodeApplication).genreList,
             onPromptClick = {
                 genre ->
-//                Toast.makeText(this, genre.genreName, Toast.LENGTH_SHORT).show()
+                toast("Going to " + genre.genreName + " tracks")
                 when (genre.genreName) {
                     "Calming" -> startActivity(Intent(this,CalmingMusicActivity::class.java))
                     "Groovy" -> startActivity(Intent(this,GroovyMusicActivity::class.java))
                     "Relaxing" -> startActivity(Intent(this,RelaxingMusicActivity::class.java))
                     "Uplifting" -> startActivity(Intent(this,UpliftingMusicActivity::class.java))
                     "Your Favorites" -> startActivity(Intent(this,MusicFavoritesActivity::class.java))
-//                    else -> {recreate()}
                 }
             }
         )

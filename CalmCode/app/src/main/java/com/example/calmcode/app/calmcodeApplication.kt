@@ -16,49 +16,49 @@ class calmcodeApplication : Application(){
     var isSongPlaying : Int = 0
     var mediaPlayer : MediaPlayer? = null
 
-    val calmingMusicList = listOf(
-        MusicTrack("Kricketune", 0.minutes + 2.seconds, R.raw.kricketune, "Calming"),
-        MusicTrack("*Vibing Over Venus", 6.minutes + 51.seconds, R.raw.kricketune, "Calming"),
+    val calmingMusicList = mutableListOf(
+        MusicTrack("Vibing Over Venus", 6.minutes + 51.seconds, R.raw.vibing_over_venus, "Calming"),
         MusicTrack("Morning", 2.minutes + 33.seconds, R.raw.morning, "Calming"),
         MusicTrack("Evening", 3.minutes + 6.seconds, R.raw.evening, "Calming"),
-        MusicTrack("*Late Night Radio", 4.minutes + 24.seconds, R.raw.kricketune, "Calming"),
-        MusicTrack("*A Very Brady Special", 6.minutes + 28.seconds, R.raw.kricketune, "Calming"),
-        MusicTrack("*Sincerely", 6.minutes + 15.seconds, R.raw.kricketune, "Calming"),
-        MusicTrack("*Wholesome", 6.minutes + 4.seconds, R.raw.kricketune, "Calming"),
-        MusicTrack("*Past Sadness", 3.minutes + 33.seconds, R.raw.kricketune, "Calming"),
+        MusicTrack("Late Night Radio", 4.minutes + 24.seconds, R.raw.late_night_radio, "Calming"),
+        MusicTrack("A Very Brady Special", 6.minutes + 28.seconds, R.raw.a_very_brady_pecial, "Calming"),
+        MusicTrack("Sincerely", 6.minutes + 15.seconds, R.raw.sincerely, "Calming"),
+        MusicTrack("Wholesome", 6.minutes + 4.seconds, R.raw.wholesome, "Calming"),
+        MusicTrack("Past Sadness", 3.minutes + 33.seconds, R.raw.past_sadness, "Calming"),
+        MusicTrack("Pokemon Sound", 0.minutes + 2.seconds, R.raw.kricketune, "Calming"),
     )
-    val groovyMusicList = listOf(
+    val groovyMusicList = mutableListOf(
         MusicTrack("Galactic Rap", 2.minutes + 22.seconds, R.raw.galactic_rap, "Groovy"),
-        MusicTrack("*Vibing Over Venus", 6.minutes + 51.seconds, R.raw.kricketune, "Groovy"),
         MusicTrack("Paradise Found", 3.minutes + 7.seconds, R.raw.paradise_found, "Groovy"),
-        MusicTrack("*Space Jazz", 6.minutes + 10.seconds, R.raw.kricketune, "Groovy"),
-        MusicTrack("*Smooth Lovin", 4.minutes + 19.seconds, R.raw.kricketune, "Groovy"),
-        MusicTrack("*Bossa Antigua", 4.minutes + 43.seconds, R.raw.kricketune, "Groovy"),
-        MusicTrack("Bummin on Tremelo", 3.minutes + 12.seconds, R.raw.kricketune, "Groovy"),
-        MusicTrack("*Shaving Mirror", 3.minutes + 26.seconds, R.raw.kricketune, "Groovy"),
-        MusicTrack("*Poppers and Prosecco", 3.minutes + 14.seconds, R.raw.kricketune, "Groovy")
+        MusicTrack("Space Jazz", 6.minutes + 10.seconds, R.raw.space_jazz, "Groovy"),
+        MusicTrack("Smooth Lovin", 4.minutes + 19.seconds, R.raw.smooth_lovin, "Groovy"),
+        MusicTrack("Bossa Antigua", 4.minutes + 43.seconds, R.raw.bossa_antigua, "Groovy"),
+        MusicTrack("Chill Wave", 3.minutes + 11.seconds, R.raw.chill_wave, "Groovy"),
+        MusicTrack("Bummin on Tremelo", 3.minutes + 12.seconds, R.raw.bummin_on_tremelo, "Groovy"),
+        MusicTrack("Shaving Mirror", 3.minutes + 26.seconds, R.raw.shaving_mirror, "Groovy"),
+        MusicTrack("Poppers and Prosecco", 3.minutes + 14.seconds, R.raw.poppers_and_prosecco, "Groovy")
     )
-    val relaxingMusicList = listOf(
+    val relaxingMusicList = mutableListOf(
         MusicTrack("Equatorial Complex", 3.minutes + 0.seconds, R.raw.equatorial_complex, "Relaxing"),
-        MusicTrack("*Ethereal Relaxation", 28.minutes + 6.seconds, R.raw.kricketune, "Relaxing"),
-        MusicTrack("*Space Jazz", 6.minutes + 10.seconds, R.raw.kricketune, "Relaxing"),
+        MusicTrack("Reawakening", 3.minutes + 34.seconds, R.raw.reawakening, "Relaxing"),
         MusicTrack("Gymnopedie No 1", 3.minutes + 7.seconds, R.raw.gymnopedie_no_1, "Relaxing"),
-        MusicTrack("*Pepper's Theme", 3.minutes + 34.seconds, R.raw.kricketune, "Relaxing"),
-        MusicTrack("*Almost Bliss", 5.minutes + 17.seconds, R.raw.kricketune, "Relaxing"),
-        MusicTrack("*Angel Share", 3.minutes + 21.seconds, R.raw.kricketune, "Relaxing"),
-        MusicTrack("*Bittersweet", 3.minutes + 22.seconds, R.raw.kricketune, "Relaxing"),
-        MusicTrack("*Dewdrop Fantasy", 34.minutes + 58.seconds, R.raw.kricketune, "Relaxing"),
+        MusicTrack("Pepper's Theme", 3.minutes + 54.seconds, R.raw.peppers_theme, "Relaxing"),
+        MusicTrack("Almost Bliss", 5.minutes + 17.seconds, R.raw.almost_bliss, "Relaxing"),
+        MusicTrack("Angel Share", 3.minutes + 21.seconds, R.raw.angel_share, "Relaxing"),
+        MusicTrack("Bittersweet", 3.minutes + 22.seconds, R.raw.bittersweet, "Relaxing"),
+        MusicTrack("In Your Arms", 2.minutes + 48.seconds, R.raw.in_your_arms, "Relaxing"),
+        MusicTrack("Fresh Air", 4.minutes + 54.seconds, R.raw.fresh_air, "Relaxing"),
     )
-    val upliftingMusicList = listOf(
+    val upliftingMusicList = mutableListOf(
         MusicTrack("Adding the Sun", 2.minutes + 56.seconds, R.raw.adding_the_sun, "Uplifting"),
-        MusicTrack("*Crinoline Dreams", 4.minutes + 6.seconds, R.raw.kricketune, "Uplifting"),
+        MusicTrack("Crinoline Dreams", 4.minutes + 6.seconds, R.raw.crinoline_dreams, "Uplifting"),
         MusicTrack("Cheery Monday", 1.minutes + 20.seconds, R.raw.cheery_monday, "Uplifting"),
-        MusicTrack("*Airship Serenity", 4.minutes + 0.seconds, R.raw.kricketune, "Uplifting"),
-        MusicTrack("*Fretless", 5.minutes + 36.seconds, R.raw.kricketune, "Uplifting"),
-        MusicTrack("*Funky Chunk", 3.minutes + 59.seconds, R.raw.kricketune, "Uplifting"),
-        MusicTrack("*Montauk Point", 3.minutes + 40.seconds, R.raw.kricketune, "Uplifting"),
-        MusicTrack("*Gonna Start v2", 2.minutes + 35.seconds, R.raw.kricketune, "Uplifting"),
-        MusicTrack("*Americana", 3.minutes + 22.seconds, R.raw.kricketune, "Uplifting")
+        MusicTrack("Airship Serenity", 4.minutes + 0.seconds, R.raw.airship_serenity, "Uplifting"),
+        MusicTrack("Fretless", 5.minutes + 36.seconds, R.raw.fretless, "Uplifting"),
+        MusicTrack("Funky Chunk", 3.minutes + 59.seconds, R.raw.funky_chunk, "Uplifting"),
+        MusicTrack("Montauk Point", 3.minutes + 40.seconds, R.raw.montauk_point, "Uplifting"),
+        MusicTrack("Gonna Start v2", 2.minutes + 35.seconds, R.raw.gonna_start, "Uplifting"),
+        MusicTrack("Americana", 3.minutes + 22.seconds, R.raw.americana, "Uplifting")
     )
     val downloadList : MutableList<MusicTrack> = mutableListOf()
     val favoritesList : MutableList<MusicTrack> = mutableListOf()

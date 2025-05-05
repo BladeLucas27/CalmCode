@@ -1,6 +1,5 @@
 package com.example.calmcode
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
@@ -12,6 +11,7 @@ import android.provider.MediaStore
 import android.widget.ImageButton
 import android.widget.ListView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicDownloadsCustomListViewAdapter
@@ -21,7 +21,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-class MusicDownloadsActivity : Activity() {
+class MusicDownloadsActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

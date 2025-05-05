@@ -17,7 +17,9 @@ import com.example.calmcode.data.MusicTrack
 import java.util.concurrent.TimeUnit
 
 class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
-                                       private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
+                                       private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit,
+                                       private val onLongClick: (MusicTrack) -> Unit)
+    : BaseAdapter() {
         private var countDownTimer: CountDownTimer? = null
         private var mediaPlayer: MediaPlayer? = null
         private val handler = Handler(Looper.getMainLooper())
