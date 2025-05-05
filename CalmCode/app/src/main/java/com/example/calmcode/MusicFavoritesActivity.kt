@@ -135,13 +135,13 @@ class MusicFavoritesActivity : AppCompatActivity() {
     fun removeFromFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_border_24
         (application as calmcodeApplication).favoritesList.remove(track)
-        (application as calmcodeApplication).genreList[4].favoriteCount--
         when(track.genre){
             "Calming" -> (application as calmcodeApplication).genreList[0].favoriteCount--
             "Groovy" -> (application as calmcodeApplication).genreList[1].favoriteCount--
             "Relaxing" -> (application as calmcodeApplication).genreList[2].favoriteCount--
             "Uplifting" -> (application as calmcodeApplication).genreList[3].favoriteCount--
         }
+        (application as calmcodeApplication).genreList[4].favoriteCount--
         recreate()
     }
 }
