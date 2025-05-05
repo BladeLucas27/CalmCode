@@ -21,7 +21,7 @@ class MusicGenresActivity : AppCompatActivity() {
 
         lvGenres.adapter = MusicGenresCustomListViewAdapter(
             this,
-            (application as calmcodeApplication).genreList,
+            (application as calmcodeApplication).getGenres(),
             onPromptClick = {
                 genre ->
                 toast("Going to " + genre.genreName + " tracks")

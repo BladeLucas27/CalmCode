@@ -24,12 +24,12 @@ class MusicFavoritesActivity : AppCompatActivity() {
 
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
-            (application as calmcodeApplication).favoritesList,
+            (application as calmcodeApplication).getFavorites(),
             onPromptClick = { musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                     toast("Playing Music")
-                    for(m in (application as calmcodeApplication).completeMusicList){
+                    for(m in (application as calmcodeApplication).getCompleteMusicList()){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
                                 onStop(c)
@@ -59,19 +59,21 @@ class MusicFavoritesActivity : AppCompatActivity() {
                 dialog.show()
             },
             onLongClick = { musicTrack ->
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Add to Downloads")
-                builder.setMessage("Would you like to add this track to the downloads page?")
+                if(checkDownloads(musicTrack)){
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Add to Downloads")
+                    builder.setMessage("Would you like to add this track to the downloads page?")
 
-                builder.setPositiveButton("Add") { dialog, which ->
-                    addToDownloads(musicTrack)
-                    dialog.dismiss()
+                    builder.setPositiveButton("Add") { dialog, which ->
+                        addToDownloads(musicTrack)
+                        dialog.dismiss()
+                    }
+                    builder.setNegativeButton("No") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    val dialog = builder.create()
+                    dialog.show()
                 }
-                builder.setNegativeButton("No") { dialog, which ->
-                    dialog.dismiss()
-                }
-                val dialog = builder.create()
-                dialog.show()
             }
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
@@ -129,19 +131,34 @@ class MusicFavoritesActivity : AppCompatActivity() {
         track.currentStatus = R.drawable.baseline_play_circle_24
         recreate()
     }
+    fun checkDownloads(track: MusicTrack) : Boolean{
+        for(d in (application as calmcodeApplication).getDownloads()){
+            if(d.trackName == track.trackName){
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Already in Downloads")
+
+                builder.setPositiveButton("Dismiss") { dialog, which ->
+                }
+                val dialog = builder.create()
+                dialog.show()
+                return false
+            }
+        }
+        return true
+    }
     fun addToDownloads(track: MusicTrack){
-        (application as calmcodeApplication).downloadList.add(track)
+        (application as calmcodeApplication).getDownloads().add(track)
     }
     fun removeFromFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_border_24
-        (application as calmcodeApplication).favoritesList.remove(track)
+        (application as calmcodeApplication).getFavorites().remove(track)
         when(track.genre){
-            "Calming" -> (application as calmcodeApplication).genreList[0].favoriteCount--
-            "Groovy" -> (application as calmcodeApplication).genreList[1].favoriteCount--
-            "Relaxing" -> (application as calmcodeApplication).genreList[2].favoriteCount--
-            "Uplifting" -> (application as calmcodeApplication).genreList[3].favoriteCount--
+            "Calming" -> (application as calmcodeApplication).getGenres()[0].favoriteCount--
+            "Groovy" -> (application as calmcodeApplication).getGenres()[1].favoriteCount--
+            "Relaxing" -> (application as calmcodeApplication).getGenres()[2].favoriteCount--
+            "Uplifting" -> (application as calmcodeApplication).getGenres()[3].favoriteCount--
         }
-        (application as calmcodeApplication).genreList[4].favoriteCount--
+        (application as calmcodeApplication).getGenres()[4].favoriteCount--
         recreate()
     }
 }

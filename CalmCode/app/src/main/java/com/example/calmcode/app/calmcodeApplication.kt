@@ -13,10 +13,8 @@ class calmcodeApplication : Application(){
     private var username : String = ""
     private var password : String = ""
     private var email : String = ""
-    var isSongPlaying : Int = 0
-    var mediaPlayer : MediaPlayer? = null
 
-    val calmingMusicList = mutableListOf(
+    private val calmingMusicList = mutableListOf(
         MusicTrack("Vibing Over Venus", 6.minutes + 51.seconds, R.raw.vibing_over_venus, "Calming"),
         MusicTrack("Morning", 2.minutes + 33.seconds, R.raw.morning, "Calming"),
         MusicTrack("Evening", 3.minutes + 6.seconds, R.raw.evening, "Calming"),
@@ -27,7 +25,7 @@ class calmcodeApplication : Application(){
         MusicTrack("Past Sadness", 3.minutes + 33.seconds, R.raw.past_sadness, "Calming"),
         MusicTrack("Pokemon Sound", 0.minutes + 2.seconds, R.raw.kricketune, "Calming"),
     )
-    val groovyMusicList = mutableListOf(
+    private val groovyMusicList = mutableListOf(
         MusicTrack("Galactic Rap", 2.minutes + 22.seconds, R.raw.galactic_rap, "Groovy"),
         MusicTrack("Paradise Found", 3.minutes + 7.seconds, R.raw.paradise_found, "Groovy"),
         MusicTrack("Space Jazz", 6.minutes + 10.seconds, R.raw.space_jazz, "Groovy"),
@@ -38,7 +36,7 @@ class calmcodeApplication : Application(){
         MusicTrack("Shaving Mirror", 3.minutes + 26.seconds, R.raw.shaving_mirror, "Groovy"),
         MusicTrack("Poppers and Prosecco", 3.minutes + 14.seconds, R.raw.poppers_and_prosecco, "Groovy")
     )
-    val relaxingMusicList = mutableListOf(
+    private val relaxingMusicList = mutableListOf(
         MusicTrack("Equatorial Complex", 3.minutes + 0.seconds, R.raw.equatorial_complex, "Relaxing"),
         MusicTrack("Reawakening", 3.minutes + 34.seconds, R.raw.reawakening, "Relaxing"),
         MusicTrack("Gymnopedie No 1", 3.minutes + 7.seconds, R.raw.gymnopedie_no_1, "Relaxing"),
@@ -49,7 +47,7 @@ class calmcodeApplication : Application(){
         MusicTrack("In Your Arms", 2.minutes + 48.seconds, R.raw.in_your_arms, "Relaxing"),
         MusicTrack("Fresh Air", 4.minutes + 54.seconds, R.raw.fresh_air, "Relaxing"),
     )
-    val upliftingMusicList = mutableListOf(
+    private val upliftingMusicList = mutableListOf(
         MusicTrack("Adding the Sun", 2.minutes + 56.seconds, R.raw.adding_the_sun, "Uplifting"),
         MusicTrack("Crinoline Dreams", 4.minutes + 6.seconds, R.raw.crinoline_dreams, "Uplifting"),
         MusicTrack("Cheery Monday", 1.minutes + 20.seconds, R.raw.cheery_monday, "Uplifting"),
@@ -60,12 +58,14 @@ class calmcodeApplication : Application(){
         MusicTrack("Gonna Start v2", 2.minutes + 35.seconds, R.raw.gonna_start, "Uplifting"),
         MusicTrack("Americana", 3.minutes + 22.seconds, R.raw.americana, "Uplifting")
     )
-    val downloadList : MutableList<MusicTrack> = mutableListOf()
-    val favoritesList : MutableList<MusicTrack> = mutableListOf()
-    val completeMusicList = listOf(
+    private val downloadList : MutableList<MusicTrack> = mutableListOf()
+    private val favoritesList : MutableList<MusicTrack> = mutableListOf()
+    var isSongPlaying : Int = 0
+    var mediaPlayer : MediaPlayer? = null
+    private val completeMusicList = listOf(
         calmingMusicList, groovyMusicList, relaxingMusicList, upliftingMusicList, favoritesList
     )
-    val genreList = listOf(
+    private val genreList = listOf(
         Genre("Calming", R.drawable.baseline_self_improvement_24),
         Genre("Groovy", R.drawable.baseline_album_24),
         Genre("Relaxing", R.drawable.baseline_hotel_24),
@@ -78,8 +78,16 @@ class calmcodeApplication : Application(){
     fun setPassword(password : String) {this.password = password}
     fun getEmail() : String = this.email
     fun setEmail(email : String) {this.email = email}
+    fun getCalm() : MutableList<MusicTrack> = calmingMusicList
+    fun getGroovy() : MutableList<MusicTrack> = groovyMusicList
+    fun getRelaxing() : MutableList<MusicTrack> = relaxingMusicList
+    fun getUplifting() : MutableList<MusicTrack> = upliftingMusicList
+    fun getFavorites() : MutableList<MusicTrack> = favoritesList
+    fun getDownloads() : MutableList<MusicTrack> = downloadList
+    fun getCompleteMusicList() : List<MutableList<MusicTrack>> = completeMusicList
+    fun getGenres() : List<Genre> = genreList
 
-    override fun onCreate() {
+        override fun onCreate() {
         super.onCreate()
         Log.e("Application Class Practice","MyApplication is called")
     }

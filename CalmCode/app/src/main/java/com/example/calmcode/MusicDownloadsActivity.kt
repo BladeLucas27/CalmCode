@@ -31,14 +31,14 @@ class MusicDownloadsActivity : AppCompatActivity() {
 
         listView.adapter = MusicDownloadsCustomListViewAdapter(
             this,
-            (application as calmcodeApplication).downloadList,
+            (application as calmcodeApplication).getDownloads(),
             onPromptClick = {
                     musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                     toast("Playing Music")
-                    for(m in (application as calmcodeApplication).completeMusicList){
+                    for(m in (application as calmcodeApplication).getCompleteMusicList()){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
                                 onStop(c)
@@ -176,6 +176,6 @@ class MusicDownloadsActivity : AppCompatActivity() {
         }
     }
     fun removeFromDownloads(track: MusicTrack){
-        (application as calmcodeApplication).downloadList.remove(track)
+        (application as calmcodeApplication).getDownloads().remove(track)
     }
 }
