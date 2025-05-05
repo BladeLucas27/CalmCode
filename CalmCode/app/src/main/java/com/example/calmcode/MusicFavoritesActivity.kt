@@ -1,6 +1,5 @@
 package com.example.calmcode
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.media.MediaPlayer
@@ -9,13 +8,14 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
 import com.example.calmcode.utils.toast
 import com.example.calmcode.utils.updateStreakCounter
 
-class MusicFavoritesActivity : Activity() {
+class MusicFavoritesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_favorites)

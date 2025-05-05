@@ -126,8 +126,8 @@ class HomeFragment : Fragment() {
         }
 
         btnFavorite.setOnClickListener {
-            Toast.makeText(requireContext(), "Going to Music Selection", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(requireContext(), MusicGenresActivity::class.java))
+            Toast.makeText(requireContext(), "Going to Favorited Music Selection", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), MusicFavoritesActivity::class.java))
         }
 
         btnDownloads.setOnClickListener {
