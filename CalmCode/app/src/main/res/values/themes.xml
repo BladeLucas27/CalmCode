@@ -21,6 +21,7 @@
         <item name="android:navigationBarColor">#1e1d1d</item>
         <item name="android:windowLightStatusBar">false</item>
 
+
         <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.App.Corner.Medium</item>
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
 
@@ -65,4 +66,5 @@
         <item name="cornerSizeBottomLeft">0dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
+
 </resources>

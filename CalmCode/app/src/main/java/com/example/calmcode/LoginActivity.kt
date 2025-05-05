@@ -1,5 +1,6 @@
 package com.example.calmcode
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calmcode.app.calmcodeApplication
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 class LoginActivity : AppCompatActivity() {
@@ -29,6 +32,8 @@ class LoginActivity : AppCompatActivity() {
         val button_login = findViewById<Button>(R.id.button_login)
         val button_register = findViewById<Button>(R.id.button_register)
 
+        edittext_username.setText((application as calmcodeApplication).getUsername())
+        edittext_password.setText((application as calmcodeApplication).getPassword())
 
         button_login.setOnClickListener{
             Log.e("CalmCode", ":Login button is clicked")
@@ -60,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         button_register.setOnClickListener {
             Log.e("CalmCode", "button is clicked")
             Toast.makeText(this, "Opening register screen", Toast.LENGTH_LONG).show()
-            val intent = Intent(    this,HomeActivity::class.java)
+            val intent = Intent(    this,RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }

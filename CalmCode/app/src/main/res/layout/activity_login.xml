@@ -29,6 +29,10 @@
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="28dp"
         android:hint="Username"
+
+        app:boxStrokeColor="@color/midnight_blue"
+        app:hintTextColor="@color/midnight_blue"
+
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.548"
@@ -52,6 +56,8 @@
         android:layout_marginHorizontal="35dp"
         android:layout_marginTop="16dp"
         android:hint="Password"
+        app:boxStrokeColor="@color/midnight_blue"
+        app:hintTextColor="@color/midnight_blue"
         app:endIconMode="password_toggle"
         app:layout_constraintBottom_toTopOf="@+id/button_login"
         app:layout_constraintEnd_toEndOf="parent"

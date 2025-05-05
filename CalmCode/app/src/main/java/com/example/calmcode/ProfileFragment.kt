@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -64,8 +65,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvUsername = view.findViewById<TextView>(R.id.tv_username)
-        val tvEmail = view.findViewById<TextView>(R.id.tv_email)
+        val etUsername = view.findViewById<EditText>(R.id.tv_username)
+        val etEmail = view.findViewById<EditText>(R.id.tv_email)
+        val btnEditUsername = view.findViewById<ImageButton>(R.id.btn_edit_username)
+        val btnEditEmail = view.findViewById<ImageButton>(R.id.btn_edit_email)
 
         tvBirthday = view.findViewById(R.id.tv_birthday)
         val btnEditBirthday = view.findViewById<ImageButton>(R.id.btn_edit_birthday)
@@ -74,14 +77,9 @@ class ProfileFragment : Fragment() {
             showBirthdayPicker()
         }
 
+        etUsername.setText((requireActivity().application as calmcodeApplication).getUsername())
+        etEmail.setText((requireActivity().application as calmcodeApplication).getEmail())
 
-//        btnEditBirthday.setOnClickListener {
-//            showBirthdayPicker()
-//        }
-
-        // Set user data
-        tvUsername.text = (requireActivity().application as calmcodeApplication).getUsername()
-        tvEmail.text = (requireActivity().application as calmcodeApplication).getEmail()
         loadBirthday()?.let {
             val sdf = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
             tvBirthday.text = "Birthday: ${sdf.format(it)}"
@@ -90,16 +88,46 @@ class ProfileFragment : Fragment() {
         }
 
         // Click listeners for edit icons
-        view.findViewById<ImageButton>(R.id.btn_edit_username).setOnClickListener {
-            requireContext().toast("Edit Username")
+        btnEditUsername.setOnClickListener {
+            etUsername.isEnabled = true
+            etUsername.requestFocus()
+            etUsername.setSelection(etUsername.text.length)
+
+            // Optionally save on focus lost
+            etUsername.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    etUsername.isEnabled = false
+                    val newUsername = etUsername.text.toString()
+                    (requireActivity().application as calmcodeApplication).setUsername(newUsername)
+                }
+            }
         }
 
+        btnEditEmail.setOnClickListener {
+            etEmail.isEnabled = true
+            etEmail.requestFocus()
+            etEmail.setSelection(etEmail.text.length)
+
+            etEmail.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    etEmail.isEnabled = false
+                    val newEmail = etEmail.text.toString()
+                    (requireActivity().application as calmcodeApplication).setEmail(newEmail)
+                }
+            }
+        }
+
+        val prefs = requireContext().getSharedPreferences("StreakPrefs", Context.MODE_PRIVATE)
+        val streakCount = prefs.getInt("streakCount", 0)
+        val longestStreak = prefs.getInt("longestStreak", 0)
+        val totalTracks = prefs.getInt("totalTracks", 0)
+        val totalMinutes = prefs.getInt("totalMinutes", 0)
 
         // Set stat values — later you can load these dynamically from SharedPreferences or DB
-        view.findViewById<TextView>(R.id.tv_streak).text = "🔥 0 days\nCurrent Streak"
-        view.findViewById<TextView>(R.id.tv_longest).text = "📅 2 days\nLongest Streak"
-        view.findViewById<TextView>(R.id.tv_tracks).text = "▶️ 9\nTotal Tracks Completed"
-        view.findViewById<TextView>(R.id.tv_minutes).text = "⏳ 33 minutes\nTotal Time Listened"
+//        view.findViewById<TextView>(R.id.tv_streak).text = "🔥 $streakCount-day streak"
+//        view.findViewById<TextView>(R.id.tv_longest).text = "📅 $longestStreak days\nLongest Streak"
+//        view.findViewById<TextView>(R.id.tv_tracks).text = "▶️ $totalTracks\nTotal Tracks Completed"
+//        view.findViewById<TextView>(R.id.tv_minutes).text = "⏳ $totalMinutes minutes\nTotal Time Listened"
     }
 
 

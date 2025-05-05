@@ -60,6 +60,8 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation ("androidx.browser:browser:1.6.0")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
     implementation(libs.ucrop)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

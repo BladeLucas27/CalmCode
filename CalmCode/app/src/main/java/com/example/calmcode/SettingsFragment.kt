@@ -1,27 +1,34 @@
 package com.example.calmcode
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import com.example.calmcode.utils.ReminderReceiver
-import java.util.Calendar
-import android.app.TimePickerDialog
-import androidx.appcompat.widget.SwitchCompat
 import com.example.calmcode.utils.toast
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
-
 class SettingsFragment : Fragment() {
 
-    private lateinit var switchReminder: Switch
+    private lateinit var switchReminder: SwitchCompat
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
     private lateinit var tvReminderTime: TextView
@@ -29,7 +36,6 @@ class SettingsFragment : Fragment() {
     private val sharedPrefs by lazy {
         requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
     }
-
 
     private val calendar = Calendar.getInstance()
     override fun onCreateView(
@@ -42,12 +48,29 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Daily Reminder"
+            val descriptionText = "Reminds you to meditate daily"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("daily_reminder_channel", name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager = context?.getSystemService(NotificationManager::class.java)
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel)
+            }
+        }
+
         switchReminder = view.findViewById(R.id.switchDailyReminder)
         tvUsername = view.findViewById(R.id.tvUsername)
         tvEmail = view.findViewById(R.id.tvEmail)
         tvReminderTime = view.findViewById(R.id.tvReminderTime)
 
+
+        val about = view.findViewById<TextView>(R.id.about)
+        val btnLogout = view.findViewById<Button>(R.id.btn_logout)
         val redditSwitch = view.findViewById<SwitchCompat>(R.id.switch_use_reddit)
+        val articleSwitch = view.findViewById<SwitchCompat>(R.id.switch_use_reddit_for_articles)
         val prefs = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         redditSwitch.isChecked = prefs.getBoolean("useReddit", false)
 
@@ -56,6 +79,22 @@ class SettingsFragment : Fragment() {
             requireContext().toast("Source: ${if (isChecked) "Reddit" else "News"}")
         }
 
+        articleSwitch.isChecked = prefs.getBoolean("useRedditForArticles", false)
+        articleSwitch.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean("useRedditForArticles", isChecked).apply()
+            requireContext().toast("Article: ${if (isChecked) "Reddit" else "News"}")
+        }
+
+        about.setOnClickListener {
+            Toast.makeText(requireContext(), "Opening About Us Screen", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), DevelopersActivity::class.java))
+        }
+        btnLogout.setOnClickListener {
+            Toast.makeText(requireContext(), "Logging Out", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            getActivity()?.finish()
+            activity?.finish()
+        }
 
         loadAccountInfo()
         setupReminderSwitch()
@@ -104,7 +143,6 @@ class SettingsFragment : Fragment() {
         tvUsername.text = "Username: $username"
         tvEmail.text = "Email: $email"
     }
-
     private fun setupReminderSwitch() {
         val isReminderOn = sharedPrefs.getBoolean("daily_reminder", false)
         switchReminder.isChecked = isReminderOn
@@ -113,13 +151,20 @@ class SettingsFragment : Fragment() {
             sharedPrefs.edit().putBoolean("daily_reminder", isChecked).apply()
 
             if (isChecked) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
+                    requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 101)
+                }
+
+                Log.d("SET REMINDER", "Reminder set!")
                 scheduleDailyReminder()
             } else {
                 cancelDailyReminder()
             }
+
         }
     }
-
+    @SuppressLint("ScheduleExactAlarm")
     private fun scheduleDailyReminder() {
         val intent = Intent(requireContext(), ReminderReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
@@ -132,20 +177,31 @@ class SettingsFragment : Fragment() {
 
         calendar.apply {
             timeInMillis = System.currentTimeMillis()
+//            timeInMillis = System.currentTimeMillis() + 30_000 // 30 seconds later
+
             set(Calendar.HOUR_OF_DAY, hour)
             set(Calendar.MINUTE, minute)
             set(Calendar.SECOND, 0)
+
+            // After setting hour, minute, second
+            if (before(Calendar.getInstance())) {
+                add(Calendar.DAY_OF_YEAR, 1)
+            }
         }
 
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(
+//        alarmManager.setRepeating(
+//            AlarmManager.RTC_WAKEUP,
+//            calendar.timeInMillis,
+//            AlarmManager.INTERVAL_DAY,
+//            pendingIntent
+//        )
+        alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
     }
-
     private fun cancelDailyReminder() {
         val intent = Intent(requireContext(), ReminderReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
@@ -155,7 +211,6 @@ class SettingsFragment : Fragment() {
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(pendingIntent)
     }
-
     private fun toggleArticleSource(useReddit: Boolean) {
         val prefs = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         prefs.edit().putBoolean("useReddit", useReddit).apply()

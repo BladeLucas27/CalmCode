@@ -14,8 +14,8 @@ class DevelopersActivity : Activity() {
         val button_settings = findViewById<Button>(R.id.button_settings)
         button_settings.setOnClickListener {
             Toast.makeText(this, "Back to Settings", Toast.LENGTH_LONG).show()
-            val intent = Intent(this, SettingsFragment::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, SettingsFragment::class.java)
+//            startActivity(intent)
             finish()
         }
     }

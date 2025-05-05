@@ -19,22 +19,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import com.bumptech.glide.Glide
 import com.example.calmcode.utils.NewsResponse
-import com.example.calmcode.utils.RedditResponse
+import com.example.calmcode.Reddit.RedditResponse
 import com.example.calmcode.utils.RedditRetrofitInstance
 import com.example.calmcode.utils.RetrofitInstance
-
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class HomeFragment : Fragment() {
-
-//    private lateinit var featuredImage: ImageView
-//    private lateinit var featuredTitle: TextView
-//    private lateinit var featuredButton: Button
-//    private lateinit var featuredImage2: ImageView
-//    private lateinit var featuredTitle2: TextView
-//    private lateinit var featuredButton2: Button
-//    private lateinit var featuredImage3: ImageView
-//    private lateinit var featuredTitle3: TextView
-//    private lateinit var featuredButton3: Button
     private var articleUrl: String? = null
     private lateinit var tvDailyQuote: TextView
 
@@ -81,21 +72,8 @@ class HomeFragment : Fragment() {
 //        to reset quotes
 //        requireContext().getSharedPreferences("QuotesPrefs", Context.MODE_PRIVATE).edit().clear().apply()
 
-
         tvDailyQuote = view.findViewById(R.id.tvDailyQuote)
         handleQuoteChange(tvDailyQuote)
-
-//        featuredImage = view.findViewById(R.id.featuredImagecard)
-//        featuredTitle = view.findViewById(R.id.featuredTextcard)
-//        featuredButton = view.findViewById(R.id.featuredButtoncard)
-//
-//        featuredImage2 = view.findViewById(R.id.featuredImagecard2)
-//        featuredTitle2 = view.findViewById(R.id.featuredTextcard2)
-//        featuredButton2 = view.findViewById(R.id.featuredButtoncard2)
-//
-//        featuredImage3 = view.findViewById(R.id.featuredImagecard3)
-//        featuredTitle3 = view.findViewById(R.id.featuredTextcard3)
-//        featuredButton3 = view.findViewById(R.id.featuredButtoncard3)
 
         fetchFeaturedArticles(view)
 
@@ -126,16 +104,38 @@ class HomeFragment : Fragment() {
         }
 
         btnFavorite.setOnClickListener {
-            Toast.makeText(requireContext(), "Going to Favorited Music Selection", Toast.LENGTH_SHORT).show()
-            val intent = Intent(requireContext(), MusicFavoritesActivity::class.java)
-            intent.putExtra("FROM_ACTIVITY", "HOME")
-            startActivity(intent)
+            Toast.makeText(requireContext(), "Going to Music Selection", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), MusicFavoritesActivity::class.java))
         }
 
         btnDownloads.setOnClickListener {
             Toast.makeText(requireContext(), "Going to Downloads Selection", Toast.LENGTH_SHORT).show()
             startActivity(Intent(requireContext(), MusicDownloadsActivity::class.java))
         }
+
+        btnCommunity.setOnClickListener {
+            Toast.makeText(requireContext(), "Going to Community Screen", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), CommunityActivity::class.java))
+        }
+
+        btnCourse.setOnClickListener {
+            Toast.makeText(requireContext(), "Going to Course Screen", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), PlacholderActivity::class.java))
+        }
+        btnWorkshop.setOnClickListener {
+            Toast.makeText(requireContext(), "Going to Workshop Screen", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), PlacholderActivity::class.java))
+        }
+        btnCoaching.setOnClickListener {
+            Toast.makeText(requireContext(), "Going to Coaching Screen", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), PlacholderActivity::class.java))
+        }
+        btnPlans.setOnClickListener {
+            Toast.makeText(requireContext(), "Going to Plans Screen", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), PlacholderActivity::class.java))
+        }
+
+
     }
     private fun getGreetingMessage(): String {
         val calendar = Calendar.getInstance()
@@ -216,51 +216,12 @@ class HomeFragment : Fragment() {
         val streakCount = prefs.getInt("streakCount", 0)
         streakTextView.text = streakCount.toString()
     }
-
-//    private fun fetchFeaturedArticles(view: View) {
-//        RetrofitInstance.api.getArticles().enqueue(object : Callback<List<Article>> {
-//            override fun onResponse(call: Call<List<Article>>, response: Response<List<Article>>) {
-//                if (response.isSuccessful && !response.body().isNullOrEmpty()) {
-//                    val articles = response.body()!!
-//                    val cards = listOf(
-//                        Triple(
-//                            view.findViewById<ImageView>(R.id.featuredImagecard),
-//                            view.findViewById<TextView>(R.id.featuredTextcard),
-//                            view.findViewById<Button>(R.id.featuredButtoncard)
-//                        ),
-//                        Triple(
-//                            view.findViewById<ImageView>(R.id.featuredImagecard2),
-//                            view.findViewById<TextView>(R.id.featuredTextcard2),
-//                            view.findViewById<Button>(R.id.featuredButtoncard2)
-//                        ),
-//                        Triple(
-//                            view.findViewById<ImageView>(R.id.featuredImagecard3),
-//                            view.findViewById<TextView>(R.id.featuredTextcard3),
-//                            view.findViewById<Button>(R.id.featuredButtoncard3)
-//                        )
-//                    )
-//
-//                    for (i in 0 until minOf(articles.size, cards.size)) {
-//                        val article = articles[i]
-//                        val (img, title, btn) = cards[i]
-//
-//                        title.text = article.title
-//                        Glide.with(this@HomeFragment).load(article.imageUrl).into(img)
-//                        btn.setOnClickListener {
-//                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
-//                            startActivity(intent)
-//                        }
-//                    }
-//                } else {
-//                    Toast.makeText(requireContext(), "No articles available", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<List<Article>>, t: Throwable) {
-//                Toast.makeText(requireContext(), "Failed to load articles", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//    }
+    override fun onResume() {
+        super.onResume()
+        if (isAdded) {
+            fetchFeaturedArticles(requireView())
+        }
+    }
     private fun fetchFeaturedArticles(view: View) {
         val prefs = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         val useReddit = prefs.getBoolean("useReddit", false)
@@ -271,17 +232,26 @@ class HomeFragment : Fragment() {
             fetchFromNewsApi(view)
         }
     }
-    override fun onResume() {
-        super.onResume()
-        if (isAdded) {
-            fetchFeaturedArticles(requireView())
-        }
-    }
+
     private fun fetchFromNewsApi(view: View) {
         val apiKey = getString(R.string.news_api_key)
 
-        RetrofitInstance.api.getMeditationArticles(apiKey = apiKey)
-            .enqueue(object : Callback<NewsResponse> {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+
+        val toDate = dateFormat.format(calendar.time)
+        calendar.set(Calendar.DAY_OF_MONTH, -1)
+        val fromDate = dateFormat.format(calendar.time)
+
+
+//        RetrofitInstance.api.getMeditationArticles(
+//            fromDate = fromDate,
+//            toDate = toDate,
+//            sortBy = "popularity",
+//            pageSize = 3,
+//            apiKey = apiKey
+        RetrofitInstance.api.getMeditationArticles(apiKey = apiKey
+        ).enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
                     if (!isAdded) return
 
@@ -352,7 +322,14 @@ class HomeFragment : Fragment() {
                     return
                 }
 
-                val posts = response.body()!!.data.children.map { it.data }
+
+//                val posts = response.body()!!.data.children.map { it.data }
+
+                val posts = response.body()!!
+                    .data.children
+                    .map { it.data }
+                    .filter { !it.over_18 }
+
                 val cards = listOf(
                     Triple(
                         view.findViewById<ImageView>(R.id.featuredImagecard),
@@ -379,9 +356,9 @@ class HomeFragment : Fragment() {
                     val thumbnailUrl = if (post.thumbnail.startsWith("http")) post.thumbnail else null
 
                     Glide.with(this@HomeFragment)
-                        .load(thumbnailUrl ?: R.drawable.ic_launcher_foreground)
-                        .placeholder(R.drawable.ic_launcher_foreground)
-                        .error(R.drawable.ic_launcher_foreground)
+                        .load(thumbnailUrl ?: R.mipmap.reddit_foreground)
+                        .placeholder(R.mipmap.reddit_foreground)
+                        .error(R.mipmap.reddit_foreground)
                         .into(img)
 
                     btn.setOnClickListener {
@@ -396,58 +373,5 @@ class HomeFragment : Fragment() {
             }
         })
     }
-//    private fun fetchFromNewsApi(view: View) {
-//        val apiKey = getString(R.string.news_api_key)
-//        RetrofitInstance.api
-//            .getMeditationArticles(apiKey = apiKey)
-//            .enqueue(object: Callback<NewsResponse> {
-//                override fun onResponse(call: Call<NewsResponse>, response: Response<NewsResponse>) {
-//                    if (!response.isSuccessful || response.body()?.articles.isNullOrEmpty()) {
-//                        Toast.makeText(requireContext(), "No articles available", Toast.LENGTH_SHORT).show()
-//                        return
-//                    }
-//                    val articles = response.body()!!.articles
-//                    val cards = listOf(
-//                        Triple(
-//                            view.findViewById<ImageView>(R.id.featuredImagecard),
-//                            view.findViewById<TextView>(R.id.featuredTextcard),
-//                            view.findViewById<Button>(R.id.featuredButtoncard)
-//                        ),
-//                        Triple(
-//                            view.findViewById<ImageView>(R.id.featuredImagecard2),
-//                            view.findViewById<TextView>(R.id.featuredTextcard2),
-//                            view.findViewById<Button>(R.id.featuredButtoncard2)
-//                        ),
-//                        Triple(
-//                            view.findViewById<ImageView>(R.id.featuredImagecard3),
-//                            view.findViewById<TextView>(R.id.featuredTextcard3),
-//                            view.findViewById<Button>(R.id.featuredButtoncard3)
-//                        )
-//                    )
-//
-//                    for (i in 0 until minOf(articles.size, cards.size)) {
-//                        val art = articles[i]
-//                        val (img, title, btn) = cards[i]
-//
-//                        title.text = art.title
-//                        Glide.with(this@HomeFragment)
-//                            .load(art.imageUrl)
-//                            .placeholder(R.drawable.ic_launcher_foreground)
-//                            .error(R.drawable.ic_launcher_foreground)
-//                            .into(img)
-//
-//                        btn.setOnClickListener {
-//                            startActivity(
-//                                Intent(Intent.ACTION_VIEW, Uri.parse(art.url))
-//                            )
-//                        }
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-//                    Toast.makeText(requireContext(), "Failed to load articles", Toast.LENGTH_SHORT).show()
-//                }
-//            })
-//    }
 }
 
