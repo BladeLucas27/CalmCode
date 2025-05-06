@@ -1,6 +1,5 @@
 package com.example.calmcode
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
@@ -12,6 +11,7 @@ import android.provider.MediaStore
 import android.widget.ImageButton
 import android.widget.ListView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicDownloadsCustomListViewAdapter
@@ -21,7 +21,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-class MusicDownloadsActivity : Activity() {
+class MusicDownloadsActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +31,14 @@ class MusicDownloadsActivity : Activity() {
 
         listView.adapter = MusicDownloadsCustomListViewAdapter(
             this,
-            (application as calmcodeApplication).downloadList,
+            (application as calmcodeApplication).getDownloads(),
             onPromptClick = {
                     musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                     toast("Playing Music")
-                    for(m in (application as calmcodeApplication).completeMusicList){
+                    for(m in (application as calmcodeApplication).getCompleteMusicList()){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
                                 onStop(c)
@@ -69,7 +69,7 @@ class MusicDownloadsActivity : Activity() {
                 dialog.show()
             },
             onLongClick = {
-                musicTrack ->
+                    musicTrack ->
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Remove Track from Downloads")
                 builder.setMessage("Would you like to remove this track from the download page?")
@@ -88,7 +88,7 @@ class MusicDownloadsActivity : Activity() {
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
-//            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
     }
@@ -132,7 +132,6 @@ class MusicDownloadsActivity : Activity() {
         track.currentStatus = R.drawable.baseline_play_circle_24
         recreate()
     }
-    @RequiresApi(Build.VERSION_CODES.Q)
     fun download(track: MusicTrack){
         val inputStream: InputStream? = try {
             resources.openRawResource(track.music)
@@ -177,6 +176,6 @@ class MusicDownloadsActivity : Activity() {
         }
     }
     fun removeFromDownloads(track: MusicTrack){
-        (application as calmcodeApplication).downloadList.remove(track)
+        (application as calmcodeApplication).getDownloads().remove(track)
     }
 }
