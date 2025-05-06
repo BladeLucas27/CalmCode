@@ -36,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
             if(confirm == password){
                 Log.e("CalmCode", "button is clicked")
 
-                val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+                val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putString("username", username)
                 editor.putString("password", password)

@@ -21,6 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.utils.ReminderReceiver
 import com.example.calmcode.utils.toast
 import java.text.SimpleDateFormat
@@ -96,7 +97,9 @@ class SettingsFragment : Fragment() {
             activity?.finish()
         }
 
-        loadAccountInfo()
+        tvUsername.setText((requireActivity().application as calmcodeApplication).getUsername())
+        tvEmail.setText((requireActivity().application as calmcodeApplication).getEmail())
+//        loadAccountInfo()
         setupReminderSwitch()
         setupTimePicker()
 

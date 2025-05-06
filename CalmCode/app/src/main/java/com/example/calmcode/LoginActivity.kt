@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
             //this line will not be executed if this is not true
 
             //validation
-            val sharedPreferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+            val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             val savedUsername = sharedPreferences.getString("username", null)
             val savedPassword = sharedPreferences.getString("password", null)
 
