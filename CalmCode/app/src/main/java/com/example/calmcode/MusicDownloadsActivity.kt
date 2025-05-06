@@ -1,5 +1,6 @@
 package com.example.calmcode
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
@@ -11,7 +12,6 @@ import android.provider.MediaStore
 import android.widget.ImageButton
 import android.widget.ListView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicDownloadsCustomListViewAdapter
@@ -21,7 +21,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 
-class MusicDownloadsActivity : AppCompatActivity() {
+class MusicDownloadsActivity : Activity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +31,14 @@ class MusicDownloadsActivity : AppCompatActivity() {
 
         listView.adapter = MusicDownloadsCustomListViewAdapter(
             this,
-            (application as calmcodeApplication).getDownloads(),
+            (application as calmcodeApplication).downloadList,
             onPromptClick = {
                     musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                     toast("Playing Music")
-                    for(m in (application as calmcodeApplication).getCompleteMusicList()){
+                    for(m in (application as calmcodeApplication).completeMusicList){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
                                 onStop(c)
@@ -88,7 +88,7 @@ class MusicDownloadsActivity : AppCompatActivity() {
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
-            startActivity(Intent(this, HomeActivity::class.java))
+//            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
     }
@@ -132,6 +132,7 @@ class MusicDownloadsActivity : AppCompatActivity() {
         track.currentStatus = R.drawable.baseline_play_circle_24
         recreate()
     }
+    @RequiresApi(Build.VERSION_CODES.Q)
     fun download(track: MusicTrack){
         val inputStream: InputStream? = try {
             resources.openRawResource(track.music)
@@ -176,6 +177,6 @@ class MusicDownloadsActivity : AppCompatActivity() {
         }
     }
     fun removeFromDownloads(track: MusicTrack){
-        (application as calmcodeApplication).getDownloads().remove(track)
+        (application as calmcodeApplication).downloadList.remove(track)
     }
 }

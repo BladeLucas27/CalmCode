@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.calmcode.app.calmcodeApplication
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -41,8 +42,8 @@ class RegisterActivity : AppCompatActivity() {
                 editor.putString("password", password)
                 editor.apply()
 
-//                (application as myApplication).setUsername(username)
-//                (application as myApplication).setPassword(password)
+                (application as calmcodeApplication).setUsername(username)
+                (application as calmcodeApplication).setPassword(password)
 
                 Toast.makeText(this, "Account Created Successfully!", Toast.LENGTH_LONG).show()
 

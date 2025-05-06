@@ -23,6 +23,7 @@
         app:itemActiveIndicatorStyle="@style/MidnightBlueActiveIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="unlabeled"
         tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

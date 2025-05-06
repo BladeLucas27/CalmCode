@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
 import androidx.annotation.RequiresApi
+import androidx.core.content.res.ResourcesCompat
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
@@ -25,14 +26,14 @@ class CalmingMusicActivity : Activity() {
 
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
-            (application as calmcodeApplication).getCalm(),
+            (application as calmcodeApplication).calmingMusicList,
             onPromptClick = {
                 musicTrack ->
 //                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
 
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
                     toast("Playing Music")
-                    for(m in (application as calmcodeApplication).getCompleteMusicList()){
+                    for(m in (application as calmcodeApplication).completeMusicList){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
                                 onStop(c)
@@ -57,26 +58,24 @@ class CalmingMusicActivity : Activity() {
                 }
             },
             onLongClick = { musicTrack ->
-                if(checkDownloads(musicTrack)){
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Add to Downloads")
-                    builder.setMessage("Would you like to add this track to the downloads page?")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Add to Downloads")
+                builder.setMessage("Would you like to add this track to the downloads page?")
 
-                    builder.setPositiveButton("Add") { dialog, which ->
-                        addToDownloads(musicTrack)
-                        dialog.dismiss()
-                    }
-                    builder.setNegativeButton("No") { dialog, which ->
-                        dialog.dismiss()
-                    }
-                    val dialog = builder.create()
-                    dialog.show()
+                builder.setPositiveButton("Add") { dialog, which ->
+                    addToDownloads(musicTrack)
+                    dialog.dismiss()
                 }
+                builder.setNegativeButton("No") { dialog, which ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
             }
         )
         val btnBack = findViewById<ImageButton>(R.id.btnBack)
         btnBack.setOnClickListener{
-            startActivity(Intent(this, MusicGenresActivity::class.java))
+//            startActivity(Intent(this, MusicGenresActivity::class.java))
             finish()
         }
     }
@@ -104,7 +103,7 @@ class CalmingMusicActivity : Activity() {
                 (application as calmcodeApplication).isSongPlaying = 0
             }
             (application as calmcodeApplication).mediaPlayer?.setOnErrorListener { mp, what, extra ->
-                toast("Erorr playing audio")
+                toast("Error playing audio")
                 false
             }
         } catch (e: Exception){
@@ -120,36 +119,21 @@ class CalmingMusicActivity : Activity() {
         track.currentStatus = R.drawable.baseline_play_circle_24
         recreate()
     }
-    fun checkDownloads(track: MusicTrack) : Boolean{
-        for(d in (application as calmcodeApplication).getDownloads()){
-            if(d.trackName == track.trackName){
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Already in Downloads")
-
-                builder.setPositiveButton("Dismiss") { dialog, which ->
-                }
-                val dialog = builder.create()
-                dialog.show()
-                return false
-            }
-        }
-        return true
-    }
     fun addToDownloads(track: MusicTrack){
-        (application as calmcodeApplication).getDownloads().add(track)
+        (application as calmcodeApplication).downloadList.add(track)
     }
     fun addToFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_24
-        (application as calmcodeApplication).getFavorites().add(track)
-        (application as calmcodeApplication).getGenres()[0].favoriteCount++
-        (application as calmcodeApplication).getGenres()[4].favoriteCount++
+        (application as calmcodeApplication).favoritesList.add(track)
+        (application as calmcodeApplication).genreList[0].favoriteCount++
+        (application as calmcodeApplication).genreList[4].favoriteCount++
         recreate()
     }
     fun removeFromFavorites(track: MusicTrack){
         track.favorite = R.drawable.baseline_favorite_border_24
-        (application as calmcodeApplication).getFavorites().remove(track)
-        (application as calmcodeApplication).getGenres()[0].favoriteCount--
-        (application as calmcodeApplication).getGenres()[4].favoriteCount--
+        (application as calmcodeApplication).favoritesList.remove(track)
+        (application as calmcodeApplication).genreList[0].favoriteCount--
+        (application as calmcodeApplication).genreList[4].favoriteCount--
         recreate()
     }
 }

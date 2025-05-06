@@ -11,160 +11,222 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="229dp"
-        android:layout_height="284dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:paddingTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="start"
+        android:paddingLeft="20dp"
         android:text="Settings"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintDimensionRatio="6:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
     <ScrollView
         android:id="@+id/settingsScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.139">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="?android:attr/dividerVertical"
             android:dividerPadding="8dp"
-            android:orientation="vertical"
-            android:showDividers="middle">
+            android:orientation="vertical">
 
-            <!-- Daily Reminder Switch -->
-            <com.google.android.material.card.MaterialCardView
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                android:background="@drawable/roundstyle3"
+                android:backgroundTint="#2f2e36"
+                android:padding="16dp">
 
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvReminderLabel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="#2f2e36"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/tvReminderLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Daily Reminder"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp" />
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Daily Reminder"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
 
 
-                    <TextView
-                        android:id="@+id/tvReminderTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvReminderLabel"
-                        android:layout_marginTop="7dp"
-                        android:text="Reminder Time: 08:00 AM"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="#FFFFFF" />
+                <TextView
+                    android:id="@+id/tvReminderTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvReminderLabel"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="Reminder Time: 08:00 AM"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="#FFFFFF" />
 
-                    <Switch
-                        android:id="@+id/switchDailyReminder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:checked="false" />
+                <!--                    <Switch-->
+                <!--                        android:id="@+id/switchDailyReminder"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignParentEnd="true"-->
+                <!--                        android:checked="false" />-->
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchDailyReminder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:checked="false"
+                    app:thumbTint="@drawable/switch_thumb_color"
+                    app:trackTint="@drawable/switch_track_color" />
 
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </RelativeLayout>
 
-            <!-- Account Info Section -->
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                android:orientation="vertical"
+                android:paddingTop="16dp">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#2f2e36"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:fontFamily="@font/montserrat_bold"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="8dp"
+                    android:text="Account Info"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="8dp"
-                        android:text="Account Info"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingLeft="20dp"
+                    android:paddingBottom="8dp"
+                    android:text="Username: johndoe"
+                    android:textColor="#ffffff" />
 
-                    <TextView
-                        android:id="@+id/tvUsername"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="4dp"
-                        android:text="Username: johndoe"
-                        android:textColor="#ffffff" />
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingLeft="20dp"
+                    android:text="Email: johndoe@example.com"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Email: johndoe@example.com"
-                        android:textColor="#ffffff" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Optional: About or Feedback -->
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#2f2e36"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="About"
-                        android:textColor="#ffffff"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingLeft="10dp"
+                android:paddingTop="16dp"
+                android:text="Customization"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_use_reddit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/montserrat"
+                android:paddingLeft="20dp"
                 android:text="Use Reddit for Featured Articles"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                app:thumbTint="@drawable/switch_thumb_color"
+                app:trackTint="@drawable/switch_track_color" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_use_reddit_for_articles"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/montserrat"
+                android:paddingLeft="20dp"
+                android:text="Use Reddit to Open Community Articles"
+                android:textColor="@color/white"
+                app:thumbTint="@drawable/switch_thumb_color"
+                app:trackTint="@drawable/switch_track_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:paddingLeft="10dp"
+                    android:text="About Us"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:fontFamily="@font/montserrat"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="8dp"
+                    android:text="For more information click here"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/midnight_blue"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Logout"
+
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
