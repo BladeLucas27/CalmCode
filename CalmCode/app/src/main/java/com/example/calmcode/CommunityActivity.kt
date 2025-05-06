@@ -20,7 +20,7 @@ class CommunityActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.redditRecyclerView)
 
-        val shimmerAdapterReddit = ShimmerAdapterReddit() // placeholder adapter
+        val shimmerAdapterReddit = ShimmerAdapterReddit()
         recyclerView.adapter = shimmerAdapterReddit
 
         val layoutManager = GridLayoutManager(this, 2)
@@ -46,7 +46,7 @@ class CommunityActivity : AppCompatActivity() {
         }
 
 
-        redditViewModel.loadNextPage() // Load the first page
+        redditViewModel.loadNextPage()
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -55,7 +55,7 @@ class CommunityActivity : AppCompatActivity() {
                 val totalItemCount = layoutManager.itemCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
 
-                if (lastVisibleItem >= totalItemCount - 4) { // Load more when 2 from bottom
+                if (lastVisibleItem >= totalItemCount - 4) {
                     redditViewModel.loadNextPage()
                 }
             }

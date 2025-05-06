@@ -58,45 +58,6 @@ class RedditPostAdapter : ListAdapter<RedditPost, RedditPostAdapter.ViewHolder>(
                 }
             }
         }
-
-//        fun bind(post: RedditPost) {
-//            title.text = post.title
-//            val imgUrl = if (post.thumbnail.startsWith("http")) post.thumbnail else null
-//            Glide.with(img.context)
-//                .load(imgUrl ?: R.drawable.ic_launcher_foreground)
-//                .into(img)
-//
-//            val prefs = requireContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
-//            val useReddit = prefs.getBoolean("useReddit", false)
-//
-//            if (useReddit) {
-//                btn.setOnClickListener {
-//                    val url = "https://www.reddit.com${post.permalink}"
-//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//                    btn.context.startActivity(intent)
-//                }
-//            } else {
-//                btn.setOnClickListener {
-//                    val url = "https://www.reddit.com${post.permalink}"
-//                    val builder = CustomTabsIntent.Builder()
-//
-//                    val customTabsIntent = builder.build()
-//
-//                    val packageName = "com.android.chrome"
-//                    val context = btn.context
-//
-//                    customTabsIntent.intent.setPackage(packageName)
-//                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//
-//                    try {
-//                        customTabsIntent.launchUrl(context, Uri.parse(url))
-//                    } catch (e: Exception) {
-//                        val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//                        context.startActivity(fallbackIntent)
-//                    }
-//                }
-//            }
-//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

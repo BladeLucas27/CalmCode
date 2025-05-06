@@ -77,12 +77,7 @@ class HomeFragment : Fragment() {
 
         fetchFeaturedArticles(view)
 
-//        featuredButton.setOnClickListener {
-//            articleUrl?.let {
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-//                startActivity(intent)
-//            } ?: Toast.makeText(requireContext(), "No article to open", Toast.LENGTH_SHORT).show()
-//        }
+
 
         val btnDaily = view.findViewById<Button>(R.id.btnDaily)
         val btnFavorite = view.findViewById<Button>(R.id.btnFavorite)

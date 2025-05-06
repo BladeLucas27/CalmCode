@@ -31,10 +31,6 @@ class EditProfileActivity : Activity() {
             (application as calmcodeApplication).setPassword(etPass.getString())
             (application as calmcodeApplication).setEmail(etEmail.getString())
             toast("Saved!")
-//            val intent = Intent(this, ProfileActivity::class.java)
-//
-//            startActivity(intent)
-//            finish()
         }
     }
 }

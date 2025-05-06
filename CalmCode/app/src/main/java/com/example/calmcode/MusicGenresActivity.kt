@@ -27,18 +27,22 @@ class MusicGenresActivity : AppCompatActivity() {
                 toast("Going to " + genre.genreName + " tracks")
                 when (genre.genreName) {
                     "Calming" -> { startActivity(Intent(this,CalmingMusicActivity::class.java))
-                        finish() }
+//                        finish()
+                    }
                     "Groovy" -> { startActivity(Intent(this,GroovyMusicActivity::class.java))
-                        finish() }
+//                        finish()
+                    }
                     "Relaxing" -> { startActivity(Intent(this,RelaxingMusicActivity::class.java))
-                        finish() }
+//                        finish()
+                    }
                     "Uplifting" -> { startActivity(Intent(this,UpliftingMusicActivity::class.java))
-                        finish() }
+//                        finish()
+                    }
                     "Your Favorites" -> {
                         val intent = Intent(this, MusicFavoritesActivity::class.java)
                         intent.putExtra("FROM_ACTIVITY", "GENRES")
                         startActivity(intent)
-                        finish()
+//                        finish()
                     }
                 }
             }
