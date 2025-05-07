@@ -159,8 +159,6 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
-
     @RequiresApi(Build.VERSION_CODES.P)
     private fun setImage(uri: Uri) {
         try {
@@ -171,7 +169,6 @@ class ProfileFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
     private fun getCircularBitmap(srcBitmap: Bitmap): Bitmap {
         val size = min(srcBitmap.width, srcBitmap.height)
         val output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
@@ -197,7 +194,6 @@ class ProfileFragment : Fragment() {
         val prefs = requireContext().getSharedPreferences("profile", Context.MODE_PRIVATE)
         prefs.edit().putString("profileImageUri", uri.toString()).apply()
     }
-
     @RequiresApi(Build.VERSION_CODES.P)
     private fun loadSavedProfileImage() {
         val prefs = requireContext().getSharedPreferences("profile", Context.MODE_PRIVATE)
@@ -206,8 +202,6 @@ class ProfileFragment : Fragment() {
             setImage(Uri.parse(it))
         }
     }
-
-
     private fun showBirthdayPicker() {
         val constraintsBuilder = CalendarConstraints.Builder()
             .setValidator(DateValidatorPointBackward.now())
@@ -228,15 +222,11 @@ class ProfileFragment : Fragment() {
             tvBirthday.text = "Birthday: $formattedDate"
             saveBirthday(date)
         }
-
     }
-
-
     private fun saveBirthday(date: Date) {
         val prefs = requireContext().getSharedPreferences("profile", Context.MODE_PRIVATE)
         prefs.edit().putLong("birthday", date.time).apply()
     }
-
     private fun loadBirthday(): Date? {
         val prefs = requireContext().getSharedPreferences("profile", Context.MODE_PRIVATE)
         val time = prefs.getLong("birthday", -1)

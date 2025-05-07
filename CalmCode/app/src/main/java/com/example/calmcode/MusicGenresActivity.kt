@@ -24,7 +24,7 @@ class MusicGenresActivity : AppCompatActivity() {
             (application as calmcodeApplication).getGenres(),
             onPromptClick = {
                     genre ->
-                toast("Going to " + genre.genreName + " tracks")
+                toast("Going to " + genre.genreName + " list")
                 when (genre.genreName) {
                     "Calming" -> { startActivity(Intent(this,CalmingMusicActivity::class.java))
 //                        finish()

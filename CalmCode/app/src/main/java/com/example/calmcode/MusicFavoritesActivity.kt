@@ -1,7 +1,10 @@
 package com.example.calmcode
 
 import android.app.AlertDialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +12,7 @@ import android.widget.ImageButton
 import android.widget.ListView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.calmcode.app.calmcodeApplication
 import com.example.calmcode.data.MusicTrack
 import com.example.calmcode.helper.MusicTracksCustomListViewAdapter
@@ -19,16 +23,14 @@ class MusicFavoritesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_music_favorites)
-
         val listView = findViewById<ListView>(R.id.FavoritesListView)
 
         listView.adapter = MusicTracksCustomListViewAdapter(
             this,
             (application as calmcodeApplication).getFavorites(),
             onPromptClick = { musicTrack ->
-//                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
-                    toast("Playing Music")
+                    toast("Playing " + musicTrack.trackName)
                     for(m in (application as calmcodeApplication).getCompleteMusicList()){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
@@ -39,7 +41,7 @@ class MusicFavoritesActivity : AppCompatActivity() {
                     playMusic(musicTrack)
                 } else{
                     (application as calmcodeApplication).isSongPlaying = 0
-                    toast("Stopping Music")
+                    toast("Stopping " + musicTrack.trackName)
                     onStop(musicTrack)
                 }
             },

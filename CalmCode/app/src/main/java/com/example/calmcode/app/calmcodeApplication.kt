@@ -29,7 +29,6 @@ class calmcodeApplication : Application(){
         MusicTrack(" Sincerely", 6.minutes + 15.seconds, R.raw.sincerely, "Calming"),
         MusicTrack(" Wholesome", 6.minutes + 4.seconds, R.raw.wholesome, "Calming"),
         MusicTrack("  Past Sadness", 3.minutes + 33.seconds, R.raw.past_sadness, "Calming"),
-        MusicTrack(" Pokemon Sound", 0.minutes + 2.seconds, R.raw.kricketune, "Calming"),
     )
     private val groovyMusicList = mutableListOf(
         MusicTrack(" Galactic Rap", 2.minutes + 22.seconds, R.raw.galactic_rap, "Groovy"),

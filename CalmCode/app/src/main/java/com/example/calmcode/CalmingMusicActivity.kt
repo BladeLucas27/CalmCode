@@ -28,10 +28,8 @@ class CalmingMusicActivity : AppCompatActivity() {
             (application as calmcodeApplication).getCalm(),
             onPromptClick = {
                     musicTrack ->
-//                Toast.makeText(this, musicTrack.trackName, Toast.LENGTH_SHORT).show()
-
                 if(musicTrack.currentStatus == R.drawable.baseline_play_circle_24){
-                    toast("Playing Music")
+                    toast("Playing " + musicTrack.trackName)
                     for(m in (application as calmcodeApplication).getCompleteMusicList()){
                         for(c in m){
                             if(c.currentStatus == R.drawable.baseline_pause_circle_24 && c != musicTrack){
@@ -42,7 +40,7 @@ class CalmingMusicActivity : AppCompatActivity() {
                     playMusic(musicTrack)
                 } else{
                     (application as calmcodeApplication).isSongPlaying = 0
-                    toast("Stopping Music")
+                    toast("Stopping " + musicTrack.trackName)
                     onStop(musicTrack)
                 }
             },
@@ -100,11 +98,16 @@ class CalmingMusicActivity : AppCompatActivity() {
 
                 (application as calmcodeApplication).mediaPlayer = null
                 track.currentStatus = R.drawable.baseline_play_circle_24
-                recreate()
                 (application as calmcodeApplication).isSongPlaying = 0
+                for(f in (application as calmcodeApplication).getFavorites()){
+                    if(f == track && f.currentStatus == R.drawable.baseline_pause_circle_24){
+                        f.currentStatus = R.drawable.baseline_play_circle_24
+                    }
+                }
+                recreate()
             }
             (application as calmcodeApplication).mediaPlayer?.setOnErrorListener { mp, what, extra ->
-                toast("Erorr playing audio")
+                toast("Error playing audio")
                 false
             }
         } catch (e: Exception){
