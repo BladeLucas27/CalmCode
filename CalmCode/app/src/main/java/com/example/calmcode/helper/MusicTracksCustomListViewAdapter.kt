@@ -1,21 +1,14 @@
 package com.example.calmcode.helper
 
 import android.content.Context
-import android.media.MediaPlayer
-import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
-import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.calmcode.R
 import com.example.calmcode.data.MusicTrack
-import java.util.concurrent.TimeUnit
-
 class MusicTracksCustomListViewAdapter(private val context: Context, private val musicList: List<MusicTrack>,
                                        private val onPromptClick: (MusicTrack) -> Unit, private val onFaveClick: (MusicTrack) -> Unit, private val onLongClick: (MusicTrack) -> Unit) : BaseAdapter() {
     override fun getCount(): Int = musicList.size

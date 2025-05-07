@@ -23,7 +23,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.calmcode.app.calmcodeApplication
-import com.example.calmcode.utils.toast
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.yalantis.ucrop.UCrop
@@ -33,9 +32,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-
-
 class ProfileFragment : Fragment() {
 
     private val UCROP_REQUEST_CODE = 69
